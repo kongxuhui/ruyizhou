@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>		<
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+
+	</head>
+
+	<body>
+        <div class="main">
+            <script src="js/header.js"></script>
+            <div class="tpsbox_bg"></div>
+            <div class="unit_tip alert_msg" id="integralError">
+                <div class="error_content">
+                    <p class="error_title">对不起，余额不足</p>
+                    <p class="error_msg">检测到本次需要支付的555积分 和 260 兑货券积分</p>
+                    <p class="clr_insufficient">余额160兑货券积分不足</p>
+                </div>
+            </div>
+            <div class="unit_tip alert_msg" id="exchangeCerError">
+                <div class="error_content">
+                    <p class="error_title">对不起，余额不足</p>
+                    <p class="error_msg">检测到本次需要支付的555积分 和 260 兑货券积分</p>
+                    <p class="clr_insufficient">余额500积分不足</p>
+                    <a class="error_recharge">立即充值</a>
+                </div>
+            </div>
+            <div class="container">
+                <div class="Bread">
+                    <a href="index.html">首页</a>
+                    <a href="ShopCenter-mine.html">店铺中心</a>
+                    <a href="">店铺库存</a>
+
+                </div>
+                <div class="usercenter">
+                    <div class="usercenter-left">
+                        <ul>
+                            <li class="title">店铺中心</li>
+                            <li>
+                                <a href="ShopCenter-mine.html">我的店铺</a>
+                            </li>
+                            <li>
+                                <a href="ShopCenter-info-default.html">店铺信息</a>
+                            </li>
+                            <li>
+                                <a href="ShopCenter-kucun.html">店铺库存</a>
+                            </li>
+                            <li class="active">
+                                <a href="ShopCenter-jinhuo.html">进货</a>
+                            </li>
+                            <li>
+                                <a href="ShopCenter-TransferAccounts.html">转账</a>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li class="title">订单中心</li>
+                            <li>
+                                <a href="ShopCenter-jhorders.html">进货单</a>
+                            </li>
+                            <li>
+                                <a href="ShopCenter-qhorders.html">取货订单管理</a>
+                            </li>
+                            <li>
+                                <a href="ShopCenter-thorders.html">退货订单管理</a>
+                            </li>
+                            <li>
+                                <a href="ShopCenter-myReturn.html">退货</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="usercenter-right">
+                        <div class="ctn">
+                            <h1>个人中心</h1>
+                            <div class="mbx">
+                                <a href="ShopCenter-info-default.html" class="active">白酒</a>
+                                <a href="ShopCenter-info.html">红酒</a>
+                                <a href="ShopCenter-info.html">啤酒</a>
+                                <a href="ShopCenter-info.html">保健酒</a>
+                                <a href="ShopCenter-info.html">饮料</a>
+                                <a href="ShopCenter-info.html">粮油</a>
+                                <a href="ShopCenter-info.html">茶叶</a>
+                                <a href="ShopCenter-info.html">其他</a>
+                            </div>
+                            <table class="userPrdlist">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: center;">主图</th>
+                                        <th>名称</th>
+                                        <th>价格</th>
+                                        <th width="70">积分</th>
+                                        <th width="100">兑换券积分</th>
+                                        <th width="70">库存(件)</th>
+                                        <th>支付方式</th>
+                                        <th>进货(件)</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th class="picspan"><img src="img/01.png" /></th>
+                                        <th class="prdtitle">42度陈酿白酒<small>4X500ml 整箱</small></th>
+                                        <th><span class="brown">￥260</span></th>
+                                        <th>260</th>
+                                        <th>380</th>
+                                        <th>50</th>
+                                        <th><select><option>积分</option><option>兑换券积分</option></select></th>
+                                        <th>
+                                            <div class="btnbox">
+                                                <a href="javascript:void(0)" class="jian">-</a>
+                                                <input type="number" class="shu" value="1" />
+                                                <a href="javascript:void(0)" class="jia">+</a>
+                                            </div>
+                                        </th>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="picspan"><img src="img/01.png" /></th>
+                                        <th class="prdtitle">42度陈酿白酒<small>4X500ml 整箱</small></th>
+                                        <th><span class="brown">￥260</span></th>
+                                        <th>260</th>
+                                        <th>380</th>
+                                        <th>50</th>
+                                        <th><select><option>积分</option><option>兑换券积分</option></select></th>
+                                        <th>
+                                            <div class="btnbox">
+                                                <a href="javascript:void(0)" class="jian">-</a>
+                                                <input type="number" class="shu" value="1" />
+                                                <a href="javascript:void(0)" class="jia">+</a>
+                                            </div>
+                                        </th>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="picspan"><img src="img/01.png" /></th>
+                                        <th class="prdtitle">42度陈酿白酒<small>4X500ml 整箱</small></th>
+                                        <th><span class="brown">￥260</span></th>
+                                        <th>260</th>
+                                        <th>380</th>
+                                        <th>50</th>
+                                        <th><select><option>积分</option><option>兑换券积分</option></select></th>
+                                        <th>
+                                            <div class="btnbox">
+                                                <a href="javascript:void(0)" class="jian">-</a>
+                                                <input type="number" class="shu" value="1" />
+                                                <a href="javascript:void(0)" class="jia">+</a>
+                                            </div>
+                                        </th>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="picspan"><img src="img/01.png" /></th>
+                                        <th class="prdtitle">42度陈酿白酒<small>4X500ml 整箱</small></th>
+                                        <th><span class="brown">￥260</span></th>
+                                        <th>260</th>
+                                        <th>380</th>
+                                        <th>50</th>
+                                        <th><select><option>积分</option><option>兑换券积分</option></select></th>
+                                        <th>
+                                            <div class="btnbox">
+                                                <a href="javascript:void(0)" class="jian">-</a>
+                                                <input type="number" class="shu" value="1" />
+                                                <a href="javascript:void(0)" class="jia">+</a>
+                                            </div>
+                                        </th>
+
+                                    </tr>
+                                    <tr>
+                                        <th class="picspan"><img src="img/01.png" /></th>
+                                        <th class="prdtitle">42度陈酿白酒<small>4X500ml 整箱</small></th>
+                                        <th><span class="brown">￥260</span></th>
+                                        <th>260</th>
+                                        <th>380</th>
+                                        <th>50</th>
+                                        <th><select><option>积分</option><option>兑换券积分</option></select></th>
+                                        <th>
+                                            <div class="btnbox">
+                                                <a href="javascript:void(0)" class="jian">-</a>
+                                                <input type="number" class="shu" value="1" />
+                                                <a href="javascript:void(0)" class="jia">+</a>
+                                            </div>
+                                        </th>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="page">
+                                <ul>
+                                    <li>上一页</li>
+                                    <li>1</li>
+                                    <li class="active">2</li>
+                                    <li>3</li>
+                                    <li>4</li>
+                                    <li>5</li>
+                                    <li>下一页</li>
+                                </ul>
+                            </div>
+                            <div id="jh_fbar" class="jh_fbar">
+                                <span class="ald_select_count">3000件</span>
+                                <span class="ald_select_list">
+                                    已选清单
+                                    <div class="unit_tip ald_selectlist_data" id="ald_selectlist_data">
+                                        <table>
+                                            <tr>
+                                                <td>42度陈酿白酒 4 x 500ml整箱</td>
+                                                <td>￥260</td>
+                                                <td><span>100</span>件</td>
+                                            </tr>
+                                            <tr>
+                                                <td>42度陈酿白酒 4 x 500ml整箱</td>
+                                                <td>￥260</td>
+                                                <td><span>100</span>件</td>
+                                            </tr>
+                                            <tr>
+                                                <td>42度陈酿白酒 4 x 500ml整箱</td>
+                                                <td>￥260</td>
+                                                <td><span>100</span>件</td>
+                                            </tr>
+                                            <tr>
+                                                <td>42度陈酿白酒 4 x 500ml整箱</td>
+                                                <td>￥260</td>
+                                                <td><span>100</span>件</td>
+                                            </tr>
+                                            <tr>
+                                                <td>42度陈酿白酒 4 x 500ml整箱</td>
+                                                <td>￥260</td>
+                                                <td><span>100</span>件</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </span>
+                                <div>
+                                    <p>贷款总额 <label class="fbar_clr_num">30000 积分</label> 和 <label class="fbar_clr_num">40000 兑换券积分</label></p>
+                                    <p>账户余额：<label>30000 积分</label>  和 <label>38558 兑换券积分</label></p>
+                                </div><span class="btn" id="js_btn_nextPlaceOrder">立即进货</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--<div class="clearfix"></div>-->
+            </div>
+
+
+            <div class="clearfix"></div>
+            <div class="footer">
+                <div class="container">
+                    <ul>
+                        <li><span>如意洲官网</span></li>
+                        <li><span>7天无理由退货</span></li>
+                        <li><span>15天免费换货</span></li>
+                        <li><span>购物享更多优惠</span></li>
+                        <li><span>全国服务店网点</span></li>
+                    </ul>
+                    <p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+                </div>
+            </div>
+        </div>
+
+		<script type="text/javascript">
+			(function($) {
+
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.AddEvent();
+                        this.getuserinfo();
+
+                        $('#js_btn_nextPlaceOrder').click(function () {
+                            location.href = 'FxJh-PlaceOrder.html';
+                        })
+					},
+					AddEvent: function() {
+
+					},
+					getuserinfo: function() {
+						//用户信息
+						if(localStorage.getItem("token")) {
+
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									if(data.code == 0) {										
+										 
+										$("#bankCardNumbertxt").html(data.data.bankCardNumber);
+										$("#emailtxt").html(data.data.email);
+										$("#mobilePhonetxt").html(data.data.mobilePhone);
+										if(!data.data.bank) {											
+											$("#yhkpic").attr("src", "img/ykard2.png");
+											$("#bankAccountName").html("暂未添加银行卡");
+											$("#yhkpic").attr("src", "img/ykard2.png");
+										} else {
+											var bankname=""
+											$("#bank option").each(function(){
+												if($(this).attr("value")==data.data.bank)
+												{
+													bankname=$(this).text()
+												
+												}
+											})
+											$("#bankAccountNametxt").html(bankname);
+											$("#bankAccountName").html(bankAccountName);
+											$("#bankCardNumber").html(bankCardNumber);
+
+										}
+										//										
+
+									}
+
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+			$("#distpicker2").distpicker({
+				province: "---- 所在省 ----",
+				city: "---- 所在市 ----",
+				district: "---- 所在区 ----"
+			});
+		</script>
+	</body>
+
+</html>

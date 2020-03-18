@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+
+	</head>
+
+	<body>
+		<!--弹窗开始-->
+		<div class="tpsbox">
+			<div class="bar"><span>输入支付密码</span><i class="close"></i></div>
+			<div>
+				<!--查询密码修改-->
+				<div class="ctn" id="cxmmctn" style="display: block;">
+					<p style="text-align: center; font-size: 16px; padding: 20px 0;">应付<span class="brown" id="zfjf">0</span>积分和<span class="brown" id="zfdhq">0</span>对货券积分</p>
+					<input type="password" id="transactionPassword" placeholder="交易密码" />
+					<span class="btn" id="sendjymm">确定</span>
+				</div>
+			</div>
+		</div>
+		<div class="tpsbox_bg"></div>
+
+		<!--弹窗结束-->
+		
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="CkCenter-mine.html">创客中心</a>
+					<a href="">我的订单</a>
+				</div>
+				<div class="usercenter">
+					<div class="usercenter-left">
+						<ul>
+							<li class="title">创客中心</li>
+							<li>
+								<a href="CkCenter-mine.html">我的创客中心</a>
+							</li>
+							<li>
+								<a href="CkCenter-info-default.html">创客信息</a>
+							</li>
+							<li>
+								<a href="CkCenter-market.html">我的市场</a>
+							</li>
+							<li>
+								<a href="CkCenter-Addid.html">创建新ID</a>
+							</li>
+							<li>
+								<a href="CkCenter-TransferAccounts.html">转账</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="title">订单中心</li>
+							<li  class="active">
+								<a href="CkCenter-orders.html">我的订单</a>
+							</li>
+							<li>
+								<a href="CkCenter-Return.html">退货</a>
+							</li>
+						</ul>
+					</div>
+					<div class="usercenter-right">
+						<div class="ctn">
+							<h1>我的订单</h1>
+							<div class="mbx">
+								<div class="pull-left">
+
+									<a href="javascript:void(0)" fid="0" class="active">待付款</a>
+									<a href="javascript:void(0)" fid="1">待取货</a>
+									<a href="javascript:void(0)" fid="2">已取货待确认</a>
+									<a href="javascript:void(0)" fid="3">已完成</a>
+
+								</div>
+								<div class="rightserch">
+									<input type="" name="" id="" value="" placeholder="输入订单号，商品名称" />
+									<span class="searchbtn"></span>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="orderlist">
+								<ul>
+								</ul>
+							</div>
+							<!--<div class="page">
+								<ul>
+									<li>上一页</li>
+									<li>1</li>
+									<li class="active">2</li>
+									<li>3</li>
+									<li>4</li>
+									<li>5</li>
+									<li>下一页</li>
+								</ul>
+							</div>-->
+						</div>
+
+					</div>
+
+					<div class="clearfix">
+
+					</div>
+
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			(function($) {
+				var pageNo = 1;
+				var pageSize = 12;
+				var orderId
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.AddEvent();
+						this.getOrderList(0)
+					},
+					AddEvent: function() {
+						var self = this;
+						$("body .mbx ").on('click', 'a', function() {
+							$(this).addClass("active").siblings().removeClass("active")
+							let fid = $(this).attr("fid")
+							self.getOrderList(fid)
+						})
+						
+						
+					},
+					getOrderList: function(orderState) {
+
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/order/getOrderList",
+							async: true,
+							data: {
+								token: localStorage.getItem("token"),
+								orderState: orderState,
+								pageNo: pageNo,
+								pageSize: pageSize
+							},
+							success: function(data) {
+								var list = data.data.content
+								if(data.code == 0) {
+									var html = "";
+
+									for(var i = 0; i < list.length; i++) {
+										var prdhtml = ""
+										var bz = "";
+										var czbtn = ''
+										for(var n = 0; n < list[i].shopOrderItemEntityList.length; n++) {
+											prdhtml += '<li><img src=\'' + list[i].shopOrderItemEntityList[n].productImage + '\' />' +
+												'<h2>' + list[i].shopOrderItemEntityList[n].productName + '</h2>' +
+												'<p>' + list[i].shopOrderItemEntityList[n].productPrice + ' 积分×' + list[i].shopOrderItemEntityList[n].productCount + '</p>' +
+												'</li>';
+										}
+										if(list[i].orderState == 0) {
+											bz = '等待付款';
+											czbtn = '<span class=\'rightbtn zfbtn\'  couponPayAmount=\'' + list[i].couponPayAmount + '\'  bonusPayAmount=\'' + list[i].bonusPayAmount + '\'  id=\'' + list[i].id + '\'>立即支付</span>'
+										}
+										if(list[i].orderState == 1) {
+											bz = '等待取货';
+											czbtn = '<span class=\'rightbtn qhbtn\'  id=\'' + list[i].id + '\'>确认取货</span>'
+											
+										}
+										if(list[i].orderState == 2) {
+											bz = '已取货待确认';
+											czbtn = '<span class=\'rightbtn confirmbtn\'  id=\'' + list[i].id + '\'>确认</span>'
+											
+										}
+										if(list[i].orderState == 3) {
+											bz = '已完成'
+											czbtn = '<span class=\'rightbtn Returnbtn\'  id=\'' + list[i].id + '\'>退货</span>'
+										}
+										html += '<li>' +
+											'<div class=\'topbox\'>' +
+											'<div class=\'status\'>' + bz + '</div>' +
+											'<div class=\'pull-left\'>' +
+											'<div class=\'toptxt\'>' +
+											'<span>' + list[i].orderTime + '</span>' +
+											'<span>' + list[i].storeName + '</span>' +
+											'<span>订单号：' + list[i].orderSn + '</span>' +
+											'</div>' +
+											'<div class=\'toptxt\'>';
+										if(list[i].returnedPurchase == 0) {
+											html += '<span>不退货</span>'
+										}
+										if(list[i].returnedPurchase == 1) {
+											html += '<span>7日无忧退货</span>'
+										}
+
+										html += '</div>' +
+											'</div>' +
+											'<div class=\'pull-right\'>' ;
+											if(list[i].orderState == 0) {
+											html +='<span>应付积分：</span><span class=\'ordermondy\'>' + list[i].bonusPayAmount + '</span><br>' +
+											'<span>应付兑货券积分：</span><span class=\'ordermondy\'>' + list[i].couponPayAmount + '</span>' ;
+										}
+											if(list[i].orderState == 1||list[i].returnedPurchase == 2||list[i].returnedPurchase == 3) {
+											html +='<span>实付积分：</span><span class=\'ordermondy\'>' + list[i].bonusPayAmount + '</span><br>' +
+											'<span>实付兑货券积分：</span><span class=\'ordermondy\'>' + list[i].couponPayAmount + '</span>' ;
+										}
+											html +='</div>' +
+											'<div class=\'clearfix\'></div>' +
+											'</div>' +
+
+											'<hr>' +
+											'<div class=\'myprdlist\'>' +
+											'<ul>' + prdhtml + '</ul>' +
+											'</div>' +
+											'<div class=\'btnbox\'>' +czbtn+
+											'<a href=\'UserCenter-orders-detail.html\' class=\'rightbtn2\'>订单详情</a>' +
+											'</div>' +
+											'<div class=\'clearfix\'></div>' +
+											'</li>'
+									}
+									$('.orderlist').html(html)
+									$(".tpsbox .message").html(data.message);
+
+								}
+							},
+							error: function() {
+
+							}
+						});
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+		</script>
+	</body>
+
+</html>

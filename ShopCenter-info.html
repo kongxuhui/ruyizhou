@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.SuperSlide.2.1.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+
+	</head>
+
+	<body>
+		<!--弹窗开始-->
+		<div class="tpsbox">
+			<div class="bar"><span>请输入</span><i class="close"></i></div>
+			<div>
+				<!--添加银行卡-->
+				<div class="ctn" id="yhkctn">
+					<select type="password" id="bank">
+						<option value="1">中国银行</option>
+						<option value="2">工商银行</option>
+						<option value="3">农业银行</option>
+						<option value="4">建设银行</option>
+					</select>
+					<input type="text" id="bankAccountName" placeholder="持卡人姓名" />
+					<input type="text" id="bankCardNumber" placeholder="银行卡号" />
+					<p style="text-align: center; color: #ff0000; padding-bottom: 10px;" class="message"></p>
+					<span class="btn" id="sendyhk">确定</span>
+				</div>
+				<!--交易密码修改-->
+				<div class="ctn" id="jymmctn">
+					<input type="password" id="transactionPassword" placeholder="原登录密码" />
+					<input type="password" id="transactionPasswordNew	" placeholder="新登录密码" />
+					<p style="text-align: center; color: #ff0000; padding-bottom: 10px;" class="message"></p>
+					<span class="btn" id="sendjymm">确定</span>
+				</div>
+				<!--邮箱修改-->
+				<div class="ctn" id="xgyxctn">
+					<input type="email" id="email" placeholder="新邮箱" />
+					<p style="text-align: center; color: #ff0000; padding-bottom: 10px;" class="message"></p>
+					<span class="btn" id="sendxgyx">确定</span>
+				</div>
+				<!--手机号修改-->
+				<div class="ctn" id="sjhctn">
+					<input type="number" id="mobilePhone" placeholder="新手机号" />
+					<p style="text-align: center; color: #ff0000; padding-bottom: 10px;" class="message"></p>
+					<span class="btn" id="senddsjh">确定</span>
+				</div>
+				<!--登录密码修改-->
+				<div class="ctn" id="dlmmctn">
+					<input type="password" id="loginPassword" placeholder="原登录密码" />
+					<input type="password" id="loginPasswordNew" placeholder="新登录密码" />
+					<p style="text-align: center; color: #ff0000; padding-bottom: 10px;" class="message"></p>
+					<span class="btn" id="senddlmm">确定</span>
+				</div>
+				<!--查询密码修改-->
+				<!--<div class="ctn" id="cxmmctn">
+					<input type="password" id="queryPassword" placeholder="原查询密码" />
+					<input type="password" id="queryPasswordNew" placeholder="新查询密码" />
+					<p style="text-align: center; color: #ff0000; padding-bottom: 10px;" class="message"></p>
+					<span class="btn" id="sendcxmm">确定</span>
+				</div>-->
+			</div>
+		</div>
+		<div class="tpsbox_bg"></div>
+
+		<!--弹窗结束-->
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="ShopCenter-mine.html">店铺中心</a>
+					<a href="">店铺信息</a>
+
+				</div>
+				<div class="usercenter">
+					<div class="usercenter-left">
+						<ul>
+							<li class="title">店铺中心</li>
+							<li>
+								<a href="ShopCenter-mine.html">我的店铺</a>
+							</li>
+							<li class="active">
+								<a href="ShopCenter-info-default.html">店铺信息</a>
+							</li>
+							<li>
+								<a href="ShopCenter-kucun.html">店铺库存</a>
+							</li>
+							<li>
+								<a href="ShopCenter-jinhuo.html">进货</a>
+							</li>
+							<li>
+								<a href="ShopCenter-TransferAccounts.html">转账</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="title">订单中心</li>
+							<li>
+								<a href="ShopCenter-jhorders.html">进货单</a>
+							</li>
+							<li>
+								<a href="ShopCenter-qhorders.html">取货订单管理</a>
+							</li>
+							<li>
+								<a href="ShopCenter-thorders.html">退货订单管理</a>
+							</li>							
+							<li>
+								<a href="ShopCenter-myReturn.html">退货</a>
+							</li>
+						</ul>
+					</div>
+					<div class="usercenter-right">
+						<div class="ctn">
+							<h1>店铺信息</h1>
+							<div class="mbx">
+								<a href="ShopCenter-info-default.html"   >基本信息</a>
+								<a href="ShopCenter-info.html" class="active">账号信息</a>
+							</div>
+							<div class="infolist" id="xgmm">
+								<ul>
+									<li>
+										<img src="img/password.png">
+										<h4>登陆密码</h4>
+										<p>用于保护帐号信息和登录安全</p>
+										<a href="javascrip:void(0)" class="btn btn-sm btn-default-line" id="dlmm">修改</a>
+									</li>
+									<!--<li>
+										<img src="img/see.png">
+										<h4>查询密码</h4>
+										<p>用于保护重要信息和信息安全</p>
+										<a href="javascrip:void(0)" class="btn btn-sm btn-default-line" id="cxmm">修改</a>
+									</li>-->
+									<li>
+										<img src="img/phone.png">
+										<h4 id="mobilePhonetxt"></h4>
+										<p>用于登录帐号、重置密码和其他安全验证</p>
+										<a href="javascrip:void(0)" class="btn btn-sm btn-default-line" id="sjh">修改</a>
+									</li>
+									<li>
+										<img src="img/email.png">
+										<h4 id="emailtxt">暂无邮箱</h4>
+										<p>用于登录帐号、重置密码和其他安全验证</p>
+										<a href="javascrip:void(0)" class="btn btn-sm btn-default-line" id="xgyx">修改</a>
+									</li>
+									<li>
+										<img src="img/jy.png">
+										<h4>交易密码</h4>
+										<p>用于保护资金信息和消费安全</p>
+										<a href="javascrip:void(0)" class="btn btn-sm btn-default-line" id="jymm">修改</a>
+									</li>
+									<li>
+										<img src="img/ykard.png" id="yhkpic">
+										<h4 id="bankAccountNametxt">暂未添加银行卡</h4>
+										<p id="bankCardNumbertxt">暂无银行卡号</p>
+										<a href="javascrip:void(0)" class="btn btn-sm btn-default-line" id="yhk">添加</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+
+		 
+	</body>
+<script>
+			(function($) {
+
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.AddEvent();
+						this.getuserinfo();
+					},
+					AddEvent: function() {
+
+					},
+					getuserinfo: function() {
+						//用户信息
+						if(localStorage.getItem("token")) {
+
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									if(data.code == 0) {										
+										 
+										$("#bankCardNumbertxt").html(data.data.bankCardNumber);
+										$("#emailtxt").html(data.data.email);
+										$("#mobilePhonetxt").html(data.data.mobilePhone);
+										if(!data.data.bank) {											
+											$("#yhkpic").attr("src", "img/ykard2.png");
+											$("#bankAccountName").html("暂未添加银行卡");
+											$("#yhkpic").attr("src", "img/ykard2.png");
+										} else {
+											var bankname=""
+											$("#bank option").each(function(){
+												if($(this).attr("value")==data.data.bank)
+												{
+													bankname=$(this).text()
+												
+												}
+											})
+											$("#bankAccountNametxt").html(bankname);
+											$("#bankAccountName").html(bankAccountName);
+											$("#bankCardNumber").html(bankCardNumber);
+
+										}
+										//										
+
+									}
+
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+			$("#distpicker2").distpicker({
+				province: "---- 所在省 ----",
+				city: "---- 所在市 ----",
+				district: "---- 所在区 ----"
+			});
+		</script>
+</html>

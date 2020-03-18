@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+			<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="tpsbox">
+			<div class="bar"><span>修改密码</span><i class="close"></i></div>
+			<div class="ctn">
+				<input type="text" />
+				<input type="text" />
+				<a href="#" class="btn"></a>
+			</div>
+		</div>
+		<div class="tpsbox_bg"></div>
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="" id="usercenterlinknew">个人中心</a>
+					<a href="">公告</a>
+				</div>
+				<div class="producttop">
+					 <div class="newscontent">
+					 	<h1 class="title"></h1>
+					 	<p class="smalltitle"></p>
+					 	<div class="ctn">
+					 		
+					 	</div>
+					 </div>
+						
+				 
+					
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			(function($) {
+
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.getuserinfo();
+						this.AddEvent();
+						this.notice()
+					},
+					AddEvent:function(){
+						 
+					},
+					notice: function() {
+						//用户信息
+						
+							$.ajax({
+								type: "get",
+								url: Work_Config.InterfaceDomain + "/admin/notice/get",
+								async: true,
+								data: {
+									id:GetPageParamer("id")									
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										$(".title").html(data.data.title);
+										$(".smalltitle").html(data.data.createDate);
+										$(".ctn").html(data.data.content);
+									}
+								},
+								error: function() {
+
+								}
+							});
+
+					
+
+					},
+					getuserinfo: function() {
+						//用户信息
+						if(localStorage.getItem("token")) {
+
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										$("#identifierId").html(data.data.identifierId)
+										if(data.data.headPortrait) {
+											$("#uesrhead").attr("src", data.data.headPortrait)
+										}
+										$("#bonus").html(data.data.bonus)
+										$("#frozenBonus").html(data.data.frozenBonus)
+										$("#coupon").html(data.data.coupon)
+										$("#frozenCoupon").html(data.data.frozenCoupon)
+										
+										$("#frozen__coupon").html(data.data.frozen__coupon)
+									}
+
+									//								for(var i = 0; i < data.data.list.length; i++) {
+									//									var html = ''
+									//									html += '<li id=\'' + data.data.list[i].id + '\'>' + data.data.list[i].name + '</li>'
+									//									$("#shopProductCategorys").append(html)
+									//								}
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+		</script>
+	</body>
+
+</html>

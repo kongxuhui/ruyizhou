@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title></title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.SuperSlide.2.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootbox.all.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/public.js"></script>
+</head>
+
+<body>
+    <div class="loginbox">
+        <div class="logo">
+            <a href="index.html"><img src="img/logo.png" /></a>
+        </div>
+        <h1 class="split-row">
+            <span>创客帐号</span>
+        </h1>
+        <div class="ck-accounts" id="ck_accounts">
+        </div>
+        <h1 class="split-row">
+            <span>服务店铺帐号</span>
+        </h1>
+        <div class="ck-accounts" id="dp_accounts">
+        </div>
+        <div class="select-acc-fbar">
+            <span id="js_btn_exit">退出</span>
+            <span id="js_btn_login">进入</span>
+        </div>
+        <div class="logincopyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</div>
+    </div>
+    <script type="text/javascript">
+        (function ($) {
+            //资源编辑页管理对象
+            var FormObj = {
+                Init: function () {
+                    publc_Obj.islogin();
+
+                    var accountJSON = localStorage.getItem('accountlist');
+                    if (!accountJSON) {
+                        location.href = 'login.html';
+                        return;
+                    }
+                    this.accountlist = JSON.parse(accountJSON);
+                    var ckItems = [];
+                    var fxItems = [];
+                    var index = 0;
+                    this.accountlist.forEach(function (item, idx) {
+                        if (item.type == 2) {
+                            if (index == 0) {
+                                ckItems.push('<span key="'+idx+'" class="ck-account-item">' + item.identifierId + '</span><div class="sub-accounts">');
+                            } else {
+                                ckItems.push('<span key="' + idx +'" class="ck-account-item">' + item.identifierId + '</span>');
+                            }
+                            index++;
+                        }
+                    })
+                    index = 0;
+                    ckItems.push('</div>');
+                    this.accountlist.forEach(function (item,idx) {
+                        if (item.type == 3) {
+                            if (index == 0) {
+                                fxItems.push('<span key="' + idx +'" class="ck-account-item">' + item.identifierId + '</span><div class="sub-accounts">');
+                            } else {
+                                fxItems.push('<span key="' + idx +'" class="ck-account-item">' + item.identifierId + '</span>');
+                            }
+                            index++;
+                        }
+                    })
+                    fxItems.push('</div>');
+                    $('#ck_accounts').html(ckItems.join(''));
+                    $('#dp_accounts').html(fxItems.join(''));
+                    this.AddEvent()
+                },
+                //事件注册
+                AddEvent: function () {
+                    var _this = this;
+                    $(document.body).delegate('.ck-account-item', 'click', function () {
+                        $('.ck-account-item').removeClass('ck-account-item-selected');
+                        $(this).addClass('ck-account-item-selected');
+                        return;
+                        
+                    })
+
+                    //退出
+                    $("#js_btn_exit").click(function () {
+                        localStorage.setItem("accountlist", "");
+                        localStorage.setItem("tmpPwd", "");
+                        location.href = "login.html";
+                    })
+                    //登录
+                    $("#js_btn_login").click(function () {
+                        if ($('.ck-account-item-selected').length == 0) {
+                            bootbox.alert('请选择账号');
+                            return;;
+                        }
+                        var idx = $('.ck-account-item-selected').attr('key');
+                        var id = _this.accountlist[idx].identifierId;
+                        var pwd = localStorage.getItem('tmpPwd');
+                        $.ajax({
+                            type: "post",
+                            url: Work_Config.InterfaceDomain + "/user/userLogin",
+                            async: true,
+                            data: {
+                                identifierId: id,
+                                loginPassword: pwd
+                            },
+                            success: function (data) {
+                                if (data.code == 0) {
+                                    localStorage.setItem("token", data.token)
+                                    localStorage.setItem("usarData", JSON.stringify(data.data))
+                                    window.location.href = 'index.html'
+                                }
+                                if (data.code == 1) {
+                                    bootbox.alert(data.message, function () {
+                                        location.href = 'login.html';
+                                    });
+                                }
+                            },
+                            error: function () {
+
+                            }
+                        });
+                    })
+                }
+            };
+            //初始化
+            FormObj.Init();
+        }(jQuery));
+    </script>
+</body>
+</html>

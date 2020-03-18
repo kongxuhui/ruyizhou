@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title></title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/distpicker.data.js"></script>
+    <script src="js/distpicker.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/public.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootbox.all.min.js"></script>
+    <script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+
+</head>
+
+<body>
+    <div class="tpsbox">
+        <div class="bar"><span>修改密码</span><i class="close"></i></div>
+        <div class="ctn">
+            <input type="text" />
+            <input type="text" />
+            <a href="#" class="btn"></a>
+        </div>
+    </div>
+    <div class="tpsbox_bg"></div>
+    <div class="main">
+        <script src="js/header.js"></script>
+
+        <div class="container">
+            <div class="Bread">
+                <a href="index.html">首页</a>
+                <a href="UserCenter-mine.html">个人中心</a>
+            </div>
+            <div class="usercenter">
+                <div class="usercenter-left">
+                    <ul>
+                        <li class="title">个人中心</li>
+                        <li class="active">
+                            <a href="UserCenter-mine.html">我的个人中心</a>
+                        </li>
+                        <li>
+                            <a href="UserCenter-info-default.html">个人信息</a>
+                        </li>
+                        <li>
+                            <a href="UserCenter-TransferAccounts.html">转账</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="title">订单中心</li>
+                        <li>
+                            <a href="UserCenter-orders.html">我的订单</a>
+                        </li>
+                        <li>
+                            <a href="UserCenter-Return.html">退货</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="usercenter-right">
+                    <a href="UserCenter-info-default.html" class="edittext editinfo">修改个人信息</a>
+                    <div class="ctn">
+                        <div class="searchbox " style="padding-top: 20px;">
+                            <div class="headbox">
+                                <div class="head">
+                                    <img src="img/face2.png" id="uesrhead" />
+                                </div>
+                                <div class="h-r">
+                                    <span class="id" id="identifierId"></span>
+                                    <p>
+                                        <!--<span class="bq">会员1级</span>-->
+                                        <a href="javascript:void(0)" id="sjck" class="sj" style="margin-left: 0;">升级为创客</a>
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+                            <hr />
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="jf">
+                            <ul>
+                                <li>
+                                    <div><span class="f16" style="margin-right: 10px; ">积分余额</span>
+                                        <a href="#" class="edittext" style="float: none;font-size: 12px;">积分规则</a>
+                                    </div>
+                                    <div><span class="bgtext" id="bonus">0</span></div>
+                                    <div>冻结：<span id="frozenBonus">0</span> </div>
+                                    <!-- 点击充值提现弹框 -->
+                                    <div>
+                                        <!-- <a href="#" class="bottombtn bottombtn2" id="recharge">充值</a> -->
+                                        <button type="button" class="bottombtn bottombtn2" data-toggle="modal" data-target="#myModal">充值</button>
+                                        <!-- 充值模态框 -->
+                                        <div class="modal fade" id="myModal">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <!-- 模态框头部 -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">充值积分 <span> (1积分=1元)</span></h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times</button>
+                                                    </div>
+
+                                                    <!-- 模态框主体 -->
+                                                    <div class="modal-body">
+                                                        <span>充值金额</span>
+                                                        <input onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" maxlength="5" type="text" placeholder="请输入充值的金额" class="amountOfMoney">
+                                                        <div>
+                                                            <button id="wxpay"></button>
+                                                            <button id="alipay"></button>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 模态框底部 -->
+                                                    <!-- <div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+													</div> -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="bottombtn bottombtn2" data-toggle="modal" data-target="#myModal_1" id="getBank">提现</button>
+                                        <!-- 提现模态框 -->
+                                        <div class="modal fade" id="myModal_1">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <!-- 模态框头部 -->
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close close_tixian" data-dismiss="modal">&times</button>
+                                                    </div>
+
+                                                    <h4 class="modal-title">申请提现</span></h4>
+
+                                                    <!-- 模态框主体 -->
+                                                    <div class="modal-body">
+                                                        <div>
+                                                            <span>提现金额</span>
+                                                            <input onkeyup="value=value.replace(/^(0+)|[^\d]{3,}}/g,'')" maxlength="5" type="text" placeholder="输入提现金额，必须大于100元" class="amountOfMoney_1">
+                                                            <span class="yibai"></span>
+                                                        </div>
+                                                        <div>
+                                                            <p>您可提现余额：<span id="balance"></span> 元，提交之后将3个工作日完成提现;</p>
+                                                            <p>提现前请检查个人中心的基本资料已经填写了<span>真实姓名</span>和<span>银行账户</span></p>
+                                                        </div>
+                                                        <button class="getMoney" id="getMoney">确认提款</button>
+                                                    </div>
+                                                    
+
+                                                    <!-- 模态框底部 -->
+                                                    <!-- <div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+													</div> -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div><span class="f16" style="margin-right: 10px; ">兑换积余额</span>
+                                        <a href="#" class="edittext" style="float: none;font-size: 12px;">兑换积分明细</a>
+                                    </div>
+                                    <div><span class="bgtext" id="coupon">0</span></div>
+                                    <div>冻结：<span accesskey="frozen__coupon" id="frozenCoupon"> 0</span> </div>
+
+                                    <!--<div>
+											<a href="#" class="bottombtn">兑换商品</a>
+
+										</div>-->
+                                </li>
+                                <li>
+                                    <div><span class="f16" style="margin-right: 10px; ">二维码</span>
+                                        <button type="button" class="edittext fanli" data-toggle="modal" data-target="#getJifen" id="getBank">设置返利方式</button>
+                                        <!-- <a href="#" class="edittext" style="float: none;font-size: 12px;">设置返利方式</a> -->
+                                        <!-- 返利模态框 -->
+                                        <div class="modal fade" id="getJifen">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <!-- 模态框头部 -->
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close close_fanli" data-dismiss="modal">&times</button>
+                                                    </div>
+
+                                                    <h4 class="modal-title">设置返利方式</span></h4>
+
+                                                    <!-- 模态框主体 -->
+                                                    <div class="modal-body">
+                                                        <div>
+                                                            <button>返积分</button>
+                                                            <button>返兑货券积分</button>
+                                                            <div class="yibai">请选择返利方式</div>
+                                                        </div>
+                                                        <div>
+                                                            <p>请谨慎选择，选择后不可再更改，所有通过二维码分享</p>
+                                                            <p>好友购买获得的奖励都直接按最终选择的来计算。</p>
+                                                        </div>
+                                                        <button class="getMoney" id="getJifen_ok">确认</button>
+                                                    </div>
+                                                    
+
+                                                    <!-- 模态框底部 -->
+                                                    <!-- <div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+													</div> -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div id="qrcode"></div>
+                                    <div><a href="" id="btnsavaImg" class="brown">保存二维码到电脑</a></div>
+                                    <!--<div>
+											<a href="#" class="bottombtn">兑换商品</a>
+
+										</div>-->
+                                </li>
+                            </ul>
+                        </div>
+                        <hr />
+                        <h4 class="ggtitle">公告</h4>
+                        <div class="gglist">
+                            <ul>
+                                <!--<li><a href="">. 新系统正式上线</a></li>
+									<li><a href="">. 会员消费满380可升级为创客</a></li>
+									<li><a href="">. 北京经销商申请开放</a></li>
+									<li><a href="">. 新系统正式上线</a></li>
+									<li><a href="">. 会员消费满380可升级为创客</a></li>
+									<li><a href="">. 北京经销商申请开放</a></li>-->
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--<div class="clearfix"></div>-->
+        </div>
+        <div class="clearfix"></div>
+        <div class="footer">
+            <div class="container">
+                <ul>
+                    <li><span>如意洲官网</span></li>
+                    <li><span>7天无理由退货</span></li>
+                    <li><span>15天免费换货</span></li>
+                    <li><span>购物享更多优惠</span></li>
+                    <li><span>全国服务店网点</span></li>
+                </ul>
+                <p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提交成功 -->
+    <button type="button" class="success" data-toggle="modal" data-target="#success"></button>
+           
+          <!-- 模态框 -->
+          <div class="modal fade" id="success">
+            <div class="modal-dialog modal-sm">
+              <div class="modal-content">
+           
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                  提交成功
+                </div>
+           
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+           
+              </div>
+            </div>
+          </div>
+
+
+
+    <script>
+        (function($) {
+            //资源编辑页管理对象
+            var FormObj = {
+                Init: function() {
+                    publc_Obj.islogin();
+                    publc_Obj.AddEvent();
+                    this.getuserinfo();
+                    this.AddEvent();
+                    this.getnotice()
+                },
+                AddEvent: function() {
+                    $("#sjck").click(function() {
+
+                        var dialog = bootbox.dialog({
+                            //									title: '温馨提示',
+                            message: "<div><h2 class=\"text-center pb20 \">升级为创客</h2><p class=\"text-center \"><span >必须一次性原价购物></span><span class=\"brown\">大于380</span><span>可成为创客</span> <br> <span >创客具有推广权，可获得更大优惠</span> </p></div>",
+                            size: 'middle',
+                            buttons: {
+                                noclose: {
+                                    label: "立即去购物",
+                                    className: 'btn-warning btn-block col-6 center-block ma  ',
+                                    callback: function() {
+                                        window.location.href = 'index.html'
+                                    }
+                                }
+                            }
+                        });
+                    })
+                },
+                getnotice: function() {
+                    //用户信息						
+                    $.ajax({
+                        type: "post",
+                        url: Work_Config.InterfaceDomain + "/admin/notice/list",
+                        async: true,
+                        data: {
+                            type: 0,
+                            state: 0,
+                            userType: 1
+                        },
+                        success: function(data) {
+                            if (data.code == 0) {
+                                var noticelist = ''
+                                for (var i = 0; i < data.data.length; i++) {
+                                    noticelist += "<li ><a target=\"_blank\" href=\"notice_content.html?id=" + data.data[i].id + "\">. " + data.data[i].title + "</a></li>"
+                                }
+                                $(".gglist ul").html(noticelist)
+                            }
+                        },
+                        error: function() {
+
+                        }
+                    });
+                },
+                getuserinfo: function() {
+                    //用户信息
+                    if (localStorage.getItem("token")) {
+
+                        $.ajax({
+                            type: "post",
+                            url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+                            async: true,
+                            data: {
+                                token: localStorage.getItem("token")
+                            },
+                            success: function(data) {
+                                if (data.code == 0) {
+                                    $("#identifierId").html(data.data.identifierId)
+                                    $("#qrcode").qrcode({
+                                        render: "canvas",
+                                        width: 100,
+                                        height: 100,
+                                        text: 'http://www.ryzmall.com/register.html?sharingid=' + data.data.identifierId,
+                                    }); // 设置要生成二维码的链接
+                                    if (data.data.headPortrait) {
+                                        $("#uesrhead").attr("src", data.data.headPortrait)
+                                    }
+                                    $("#bonus").html(data.data.bonus)
+                                    $("#frozenBonus").html(data.data.frozenBonus)
+                                    $("#coupon").html(data.data.coupon)
+                                    $("#frozenCoupon").html(data.data.frozenCoupon)
+                                    $("#frozen__coupon").html(data.data.frozen__coupon)
+                                    $("#balance").html(data.data.bonus)
+                                }
+
+                                //								for(var i = 0; i < data.data.list.length; i++) {
+                                //									var html = ''
+                                //									html += '<li id=\'' + data.data.list[i].id + '\'>' + data.data.list[i].name + '</li>'
+                                //									$("#shopProductCategorys").append(html)
+                                //								}
+                            },
+                            error: function() {
+
+                            }
+                        });
+
+                    }
+
+                }
+
+            };
+            //初始化
+            FormObj.Init();
+            //充值
+            //微信充值
+            $('#wxpay').click(() => {
+                    let amountOfMoney = $('.amountOfMoney').val();
+                    console.log(amountOfMoney);
+                })
+                //支付宝充值
+            $('#alipay').click(() => {
+                let amountOfMoney = $('.amountOfMoney').val();
+                console.log(amountOfMoney);
+            })
+
+
+            $('#btnsavaImg').click(() => {
+                downloadFile('ruyizhou.png', $('#qrcode canvas')[0].toDataURL("image/png"));
+            })
+            //提现
+            var flag_tixian;
+            $('#getBank').click(() => {
+                $.ajax({
+                        type: "post",
+                        url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+                        async: true,
+                        data: {
+                            token: localStorage.getItem("token")
+                        },
+                        success: function(data) {
+                            if (data.code == 0) {
+                                if(data.data.bankAccountName != '' && data.data.bankCardNumber != ''){
+                                    flag_tixian = true;
+                                    $("#amountOfMoney_1").removeAttr('disabled');
+                                    $("#getMoney").removeAttr('disabled');
+                                }else{
+                                    $(".amountOfMoney_1").attr('disabled','disabled')
+                                    $("#getMoney").attr('disabled','disabled')
+                                    $('.yibai').css('display','block')
+                                    $('.yibai').html('"真实姓名"和"银行账户"未填写')
+                                }
+                            }
+                        },
+                        error: function() {
+
+                        }
+                    });
+            })
+            $('#getMoney').click(() => {
+                if($('.amountOfMoney_1').val() >= 100 && flag_tixian){
+                    $.ajax({
+                        type: "post",
+                        url: Work_Config.InterfaceDomain + "/withdrawal/add",
+                        async: true,
+                        data: {
+                            token: localStorage.getItem("token"),
+                            money: $('.amountOfMoney_1').val()
+                        },
+                        success: function(data) {
+                            if (data.code == 0) {
+                                $('.close_tixian').click()
+                                setTimeout(() => {$('.success').click()},500)
+                            }else{
+                                $('.yibai').html('提交失败')
+                                $('.yibai').css('display','block')
+                            }
+                        },
+                        error: function() {
+                            
+                        }
+                    });
+
+                    
+                }else{
+                    $('.yibai').html('金额须大于100元')
+                    $('.yibai').css('display','block')
+                }
+                
+            })
+
+            // 设置返利方式
+
+            $("#getJifen .modal-body div button").click(function(){
+                $(this).addClass("fanliFocus");
+                $(this).siblings().removeClass("fanliFocus");
+            })
+            
+            $('#getJifen_ok').click(() => {
+                var rebateMode;
+                if($('.fanliFocus').html() == '返兑货券积分'){
+                    rebateMode = 1;
+                }else{
+                    rebateMode = 0;
+                }
+                if($('#getJifen .modal-body div button').hasClass('fanliFocus')){
+                    $.ajax({
+                        type: "post",
+                        url: Work_Config.InterfaceDomain + "/user/updateUserRebateMode",
+                        async: true,
+                        data: {
+                            token: localStorage.getItem("token"),
+                            // rebateMode: rebateMode
+                        },
+                        success: function(data) {
+                            console.log(data)
+                            if (data.code == 0) {
+                                $('.close_fanli').click()
+                                setTimeout(() => {$('.success').click()},500)
+                                $('#getJifen .yibai').css('display','none')
+                            }else{
+                                $('.yibai').html('提交失败')
+                                $('#getJifen .yibai').css('display','block')
+                            }
+                        },
+                        error: function() {
+                            
+                        }
+                    });
+
+                    
+                }else{
+                    $('#getJifen .yibai').css('display','block')
+                }
+            })
+
+            // 下载二维码到本地
+            function base64Img2Blob(code) {
+                var parts = code.split(';base64,');
+                var contentType = parts[0].split(':')[1];
+                var raw = window.atob(parts[1]);
+                var rawLength = raw.length;
+                var uInt8Array = new Uint8Array(rawLength);
+                for (var i = 0; i < rawLength; ++i) {
+                    uInt8Array[i] = raw.charCodeAt(i);
+                }
+                return new Blob([uInt8Array], {
+                    type: contentType
+                });
+            }
+
+            function downloadFile(fileName, content) {
+                var aLink = document.getElementById('btnsavaImg');
+                var blob = base64Img2Blob(content); //new Blob([content]);
+                var evt = document.createEvent("HTMLEvents");
+                evt.initEvent("click", false, false); //initEvent 不加后两个参数在FF下会报错
+                aLink.download = fileName;
+                aLink.href = URL.createObjectURL(blob);
+                aLink.dispatchEvent(evt);
+            }
+
+        }(jQuery));
+    </script>
+</body>
+
+</html>

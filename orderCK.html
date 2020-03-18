@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+	</head>
+
+	<body>
+		<!--弹窗开始-->
+		<div class="tpsbox">
+			<div class="bar"><span>输入支付密码</span><i class="close"></i></div>
+			<div>
+				<!--查询密码修改-->
+				<div class="ctn" id="cxmmctn" style="display: block;">
+					<p style="text-align: center; font-size: 16px; padding: 20px 0;">应付<span class="brown" id="zfjf">0</span>积分和<span class="brown" id="zfdhq">0</span>兑货券积分</p>
+					<input type="password" id="transactionPassword" placeholder="交易密码" />
+					<span class="btn" id="sendjymm">确定</span>
+				</div>
+			</div>
+		</div>
+		<div class="tpsbox_bg"></div>
+
+		<!--弹窗结束-->
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+
+				<div class="smalprdlist m-t20">
+					<div class="linebar linebar2">服务网点</div>
+					<div class="searchtabbar">
+						<ul>
+							<li class="active">按店铺ID</li>
+							<li>按店铺所在地</li>
+
+						</ul>
+					</div>
+					<div class="graybox  ">
+						<div class="searchtab_ctn searchbox">
+							<ul>
+								<li>
+									<input class="langinput" id="identifierId" type="text" placeholder="输入店铺ID号进行搜索" />
+									<span class="searchbtn" id="getShopStoreByIdentifierId">查询</span></li>
+								<li id="distpicker2" style="display: none;">
+									<select id="province">
+										<!--<option>请选择 省份 </option>-->
+									</select>
+									<select id="city">
+										<!--<option>请选择 市 </option>-->
+									</select>
+									<select id="country">
+										<!--<option>请选择 区( 县 ) </option>-->
+									</select>
+									<span class="searchbtn pull-left" style="float: none; display: inline-block;" id="getShopStoreByProvinceAndCityAndCountry">查询</span>
+								</li>
+							</ul>
+						</div>
+						<div class="searchlist">
+							<div class="shoplist">
+								<!--<span class="active">赣州如意洲经营商服务店</span><span>赣州如意洲经营商服务店</span><span>赣州如意洲经营商服务店</span>
+								<span class="active">赣州如意洲经营商服务店</span><span>赣州如意洲经营商服务店</span><span>赣州如意洲经营商服务店</span>-->
+							</div>
+							<div class="shopInfo">
+								<!--<span>店铺名称：赣州如意洲经营商服务店</span>
+								<span>店铺ID:JX555555</span>
+								<span>联系电话：15188888888</span><br />
+								<span>联系地址：沙发上是否沙发安抚沙发沙发沙发按时</span>-->
+							</div>
+						</div>
+					</div>
+					<div class="linebar linebar2">选择消费类型</div>
+					<div class="lablelist m-b30">
+						<ul id="consumptionType">
+							<li><span val="0">优惠购买</span><span val="1" class="active">无优惠购买</span></li>
+						</ul>
+
+					</div>
+					<div class="linebar linebar2">选择是否需要退货服务</div>
+					<div class="lablelist">
+						<ul id="returnedPurchase">
+							<li><span class="active" val="0">不需要</span><span val="1">7日无忧退货</span></li>
+
+						</ul>
+					</div>
+
+				</div>
+				<div class="smalprdlist">
+					<div class="linebar">
+						商品
+						<a class="pull-right" href="cart.html">返回购物车 </a>
+					</div>
+					<table id="box">
+
+						<tbody id="list">
+							<!--<tr>
+								<th width="50px">
+									<img src="img/j1.jpg" /></th>
+								<th class="textlef">
+									<a href="#">42度陈酿白酒 4X500ml整箱</a>
+								</th>
+								<th>260元X1</th>
+								<th><span class="brown">260元X1</span></th>
+							</tr>
+							<tr>
+								<th>
+									<img src="img/j2.jpg" /></th>
+								<th class="textlef">
+									<a href="#">42度陈酿白酒 4X500ml整箱</a>
+								</th>
+								<th>260元X1</th>
+								<th><span class="brown">260元X1</span></th>
+							</tr>
+							<tr>
+								<th>
+									<img src="img/j3.jpg" /></th>
+								<th class="textlef">
+									<a href="#">42度陈酿白酒 4X500ml整箱</a>
+								</th>
+								<th>260元X1</th>
+								<th><span class="brown">260元X1</span></th>
+							</tr>
+							<tr>
+								<th>
+									<img src="img/j4.jpg" /></th>
+								<th class="textlef">
+									<a href="#">42度陈酿白酒 4X500ml整箱</a>
+								</th>
+								<th>260元X1</th>
+								<th><span class="brown">260元X1</span></th>
+							</tr>-->
+
+						</tbody>
+					</table>
+					<div class="loadingbox">
+						<div class="loading">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+				</div>
+				<div class="orderbottom">
+					<div>商品总数<span class="brown" id="allprd">0</span>件</div>
+					<div>商品总价<span class="brown" id="checkprd">0</span>元</div>
+					<div>应付总积分:<span class="jifen f24 brown" id="totaljf">0</span> </div>
+					<div>应付总兑货券积分:<span class="jifen f24 brown" id="totaldh">0</span></div>
+					<b class="paybtn" id="paybtn">去结算</b>
+				</div>
+
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			(function($) {
+
+				var level = 1;
+				var parentId = 1;
+				var dom = $("#province");
+				var orderId
+				var identifierId2
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						this.getProduclist()
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.AddEvent();
+						this.getArea(level, parentId, dom)
+						//						this.getuserinfo();
+
+					},
+					getProduclist: function() {
+						$(".loadingbox").show();
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/product/getShopCarListByUserId",
+							async: true,
+							data: {
+								token: localStorage.getItem("token"),
+
+							},
+							success: function(data) {
+								if(data.code == 1) {
+									$("#kong").show()
+									$("#gwc").hide()
+								}
+
+								if(data.code == 0) {
+
+									var html = "";
+									var prdnumber = 0
+									var prdmoney = 0
+									var dhjf = 0
+									var jf = 0
+									for(var i = 0; i < data.data.list.length; i++) {
+										prdnumber += data.data.list[i].productCount;
+
+										html += "<tr>" +
+											"<th width=\"50px\">" +
+											"<img src=\"" + data.data.list[i].albumPicslSmall + "\" /></th>" +
+											"<th class=\"textlef\">" +
+											"<a href=\"#\">" + data.data.list[i].productName + "</a>" +
+											"</th>";
+										if(data.data.list[i].payMode == 0) {
+											jf += parseInt(data.data.list[i].price) * parseInt(data.data.list[i].productCount)
+											prdmoney += parseInt(data.data.list[i].price) * parseInt(data.data.list[i].productCount)
+											html += "<th>" + parseInt(data.data.list[i].price) + "元X" + parseInt(data.data.list[i].productCount) + "</th>" +
+												"<th><span class=\"brown\">" + parseInt(data.data.list[i].price) * parseInt(data.data.list[i].productCount) + "积分</span></th>";
+										}
+										if(data.data.list[i].payMode == 1) {
+											dhjf += parseInt(data.data.list[i].promotionPrice) * parseInt(data.data.list[i].productCount)
+											prdmoney += parseInt(data.data.list[i].promotionPrice) * parseInt(data.data.list[i].productCount)
+											html += "<th>" + parseInt(data.data.list[i].promotionPrice) + "元X" + parseInt(data.data.list[i].productCount) + "</th>" +
+												"<th><span class=\"brown\">" + parseInt(data.data.list[i].promotionPrice) * parseInt(data.data.list[i].productCount) + "兑货券积分</span></th>";
+										}
+
+										html += "</tr>"
+
+									}
+									$(".loadingbox").hide();
+									$("#list").append(html)
+									$("#allprd").html(prdnumber)
+									$("#checkprd").html(prdmoney)
+									$("#totaljf,#zfjf").html(localStorage.getItem("zhjf"))
+									$("#totaldh,#zfdhq").html(localStorage.getItem("zhdhq"))
+
+								}
+								if(data.code == 1) {
+									//									window.location.href = 'login.html'
+								} else {
+									$(".tpsbox .message").html(data.message);
+								}
+							},
+							error: function() {
+
+							}
+						});
+					},
+					getArea: function(level, parentId, dom) {
+
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/region/getShopRegionName",
+							async: true,
+							data: {
+								level: level,
+								parentId: parentId
+							},
+							success: function(data) {
+								if(data.code == 0) {
+									var optionhtml = "";
+									for(var i = 0; i < data.data.length; i++) {
+										optionhtml += "<option value=\"" + data.data[i].id + "\">" + data.data[i].regionName + "</option>";
+									}
+									dom.append(optionhtml)
+									dom.change()
+
+								}
+
+							},
+							error: function() {}
+
+						})
+
+					},
+					AddEvent: function() {
+						var self = this;
+						//						支付密码
+						$("#sendjymm").click(function() {
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/checkTransactionPassword",
+								async: true,
+								data: {
+									token: localStorage.getItem("token"),
+									transactionPassword: $("#transactionPassword").val()
+								},
+								success: function(data) {
+									//									支付订单
+									if(data.code == 0) {
+										$(".tpsbox_bg,.tpsbox").fadeOut()
+										$.ajax({
+											type: "post",
+											url: Work_Config.InterfaceDomain + "/order/orderPayment",
+											async: true,
+											data: {
+												token: localStorage.getItem("token"),
+												orderId: orderId
+											},
+											success: function(data) {
+												if(data.code == 0) {
+													publc_Obj.message(data.message)
+													//		支付完订单并且消费超过380将客户升级未创客
+
+													if(localStorage.getItem("zhjf") >= 380 || localStorage.getItem("zhdhq") >= 380) {
+														if(localStorage.getItem("needAddid") == "1") {
+															$.ajax({
+																type: "post",
+																url: Work_Config.InterfaceDomain + "/user/addCKuser",
+																async: true,
+																data: {
+																	token: localStorage.getItem("token"),
+																	newIdentifierId: localStorage.getItem("newIdentifierId"),
+																	passWord: localStorage.getItem("passWord"),
+																	shareIdentifierId:localStorage.getItem("shareIdentifierId")
+																},
+																success: function(data) {
+																	if(data.code==0)
+																	{
+																		localStorage.setItem("needAddid", "1")
+																	localStorage.removeItem("shareIdentifierId")
+																	localStorage.removeItem("passWord")
+																	localStorage.removeItem("newIdentifierId")
+																	setTimeout(function() {
+																		publc_Obj.message(data.message)
+																		window.location.href = 'CkCenter-Addid.html'
+
+																	}, 2000)
+																	}
+																	
+																	
+
+																},
+																error: function() {
+
+																}
+															});
+
+														}
+
+													} else {
+														setTimeout(function() {
+															window.location.href = 'CkCenter-orders.html'
+
+														}, 2000)
+													}
+
+												} else {
+													bootbox.alert(data.message)
+												}
+
+											},
+											error: function() {
+
+											}
+										});
+
+									} else {
+										bootbox.alert(data.message)
+									}
+
+								},
+								error: function() {
+
+								}
+							});
+						})
+						$("body").on('click', '#paybtn', function() {
+
+							var orderType = 0;
+							var consumptionType;
+							var returnedPurchase;
+							var selfMention = 1; //0 非自提 1 自提
+							if($(".searchlist .shoplist .active").length <= 0) {
+								bootbox.alert("请选择取货点")
+								return
+							}
+							consumptionType = $("#consumptionType li .active").attr("val")
+							returnedPurchase = $("#returnedPurchase li .active").attr("val")
+							storeId = $(".searchlist .shoplist .active").attr("id")
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/order/generateOrder",
+								async: true,
+								data: {
+									token: localStorage.getItem("token"),
+									orderType: 0,
+									consumptionType: consumptionType,
+									storeId: storeId,
+									returnedPurchase: returnedPurchase,
+									selfMention: 1,
+									rebateMode:0
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										orderId = data.data.id
+										$(".tpsbox_bg,.tpsbox").fadeIn()
+
+									} else {
+										var dialog = bootbox.dialog({
+											message: '<p class="text-center mb-0"><i class="fa fa-spin fa-cog"></i> ' + data.message + '</p>',
+											closeButton: true
+										});
+									}
+								},
+								error: function() {}
+
+							})
+
+						})
+						$("#consumptionType li span").click(function() {
+							if(localStorage.getItem("needAddid") == "1") {
+								$("#consumptionType li span:eq(0)").click(function() {
+									publc_Obj.message("创建ID只能选择无优惠购买")
+								})
+
+							} else {
+								$(this).toggleClass("active").siblings().toggleClass("active")
+							}
+						})
+						$("#returnedPurchase li span").click(function() {
+							if(localStorage.getItem("needAddid") == "1") {
+								$("#returnedPurchase li span:eq(1)").click(function() {
+									publc_Obj.message("创建ID只能选择不需要")
+								})
+
+							} else {
+								$(this).toggleClass("active").siblings().toggleClass("active")
+							}
+
+						})
+						$("#province").change(function() {
+							level = 2;
+							parentId = $("#province").val();
+							dom = $("#city");
+							$("#city").html("")
+							self.getArea(level, parentId, dom);
+							$("#city").change()
+
+						})
+						$("#city").change(function() {
+							level = 3;
+							parentId = $("#city").val();
+							dom = $("#country");
+							$("#country").html("")
+							self.getArea(level, parentId, dom);
+						})
+						$(".searchtabbar li").click(function() {
+							$(".shoplist").html("");
+							$(".shopInfo").html("");
+							var i = $(".searchtabbar li").index(this)
+							$(this).addClass("active").siblings().removeClass("active")
+							$(".searchtab_ctn  li:eq(" + i + ")").show().siblings().hide()
+						})
+						//根绝店铺id获取店铺详细资料
+						$("body .shoplist").on('click', 'span', function() {
+							$(this).addClass("active").siblings().removeClass("active")
+							var userid = $(this).attr("userid")
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/shop/getShopStoreDetailByUserId",
+								async: true,
+								data: {
+									id: userid
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										$(".shopInfo").html("<span>店铺名称：" + data.data.shopName + "</span>" +
+											"<span>店铺ID:" + data.data.identifierId + "</span>" +
+											"<span>联系电话：" + data.data.principalsTel + "</span><br />" +
+											"<span>联系地址：" + data.data.addressDetails + "</span>");
+
+									}
+									if(data.code == 1) {
+										window.location.href = 'login.html'
+									} else {
+										//										$(".tpsbox .message").html(data.message);
+									}
+								},
+								error: function() {}
+
+							})
+						});
+						//按id搜索
+						$("#getShopStoreByIdentifierId").click(function() {
+							$(".shoplist").html("");
+							$(".shopInfo").html("");
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/shop/getShopStoreByIdentifierId",
+								async: true,
+								data: {
+									identifierId: $("#identifierId").val()
+
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										if(data.data.length > 0) {
+											for(var i = 0; i < data.data.length; i++) {
+												var html = ''
+												html += '<span id=' + data.data[i].id + '  userId=\'' + data.data[i].userId + '\'>' + data.data[i].shopName + '</span>'
+												$(".shoplist").append(html)
+											}
+										} else {
+											//$(".shoplist").html("未找到相关店铺")
+											bootbox.alert("未找到相关店铺")
+										}
+
+									}
+									if(data.code == 1) {
+										$(".shoplist").html(data.message)
+									}
+
+								},
+								error: function() {}
+
+							})
+						});
+						//按省市县搜索
+						$("#getShopStoreByProvinceAndCityAndCountry").click(function() {
+							$(".shoplist").html("");
+							$(".shopInfo").html("");
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/shop/getShopStoreByProvinceAndCityAndCountry",
+								async: true,
+								data: {
+									province: $("#province").val(),
+									city: $("#city").val(),
+									country: $("#country").val()
+
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										if(data.data.length > 0) {
+											for(var i = 0; i < data.data.length; i++) {
+												var html = ''
+												html += '<span id=' + data.data[i].id + '  userId=\'' + data.data[i].id + '\'>' + data.data[i].shopName + '</span>'
+												$(".shoplist").append(html)
+											}
+										} else {
+											//$(".shoplist").html("未找到相关店铺")
+											bootbox.alert("未找到相关店铺")
+										}
+
+									}
+									if(data.code == 1) {
+										$(".shoplist").html(data.message)
+									}
+								},
+								error: function() {}
+
+							})
+						});
+						$("body #shopProductCategorys").on('click', 'li', function() {
+
+							$(this).addClass("active").siblings().removeClass("active")
+							pageNo = 1;
+							id = $(this).attr("id");
+							console.log(id)
+							publc_Obj.prdlist(pageNo, id)
+
+						})
+					},
+					getuserinfo: function() {
+						//用户信息
+						if(localStorage.getItem("token")) {
+
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									if(data.code == 0) {
+
+										$("#bankCardNumbertxt").html(data.data.bankCardNumber);
+										$("#emailtxt").html(data.data.email);
+										$("#mobilePhonetxt").html(data.data.mobilePhone);
+										if(!data.data.bank) {
+											$("#yhkpic").attr("src", "img/ykard2.png");
+											$("#bankAccountName").html("暂未添加银行卡");
+											$("#yhkpic").attr("src", "img/ykard2.png");
+										} else {
+											var bankname = ""
+											$("#bank option").each(function() {
+												if($(this).attr("value") == data.data.bank) {
+													bankname = $(this).text()
+
+												}
+											})
+											$("#bankAccountNametxt").html(bankname);
+											$("#bankAccountName").html(bankAccountName);
+											$("#bankCardNumber").html(bankCardNumber);
+
+										}
+										//										
+
+									}
+
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+		</script>
+	</body>
+
+</html>

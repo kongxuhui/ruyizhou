@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+
+	</head>
+
+	<body>
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="CkCenter-mine.html">创客中心</a>
+					<a href="">创建新ID</a>
+				</div>
+				<div class="usercenter">
+					<div class="usercenter-left">
+						<ul>
+							<li class="title">创客中心</li>
+							<li>
+								<a href="CkCenter-mine.html">我的创客中心</a>
+							</li>
+							<li>
+								<a href="CkCenter-info-default.html">创客信息</a>
+							</li>
+							<li class="active">
+								<a href="CkCenter-market.html">我的市场</a>
+							</li>
+							<li>
+								<a href="CkCenter-Addid.html">创建新ID</a>
+							</li>
+							<li>
+								<a href="CkCenter-TransferAccounts.html">转账</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="title">订单中心</li>
+							<li>
+								<a href="CkCenter-orders.html">我的订单</a>
+							</li>
+							<li>
+								<a href="CkCenter-Return.html">退货</a>
+							</li>
+						</ul>
+					</div>
+					<div class="usercenter-right">
+						<div class="cxbox">
+							<input type="text" id="queryPassword" placeholder="输入查询密码" />
+							<a href="javascript:void(0)" class="cxbtn">立即查询</a>
+						</div>
+						<div class="ctn">
+							<h1>我的市场</h1>
+							<div class="mbx">
+								<div class="pull-left">
+									<a href="javascript:void(0)" class="active">全部市场</a>
+									<a href="javascript:void(0)">待开发</a>
+									<a href="javascript:void(0)">我的分享</a>
+								</div>
+								<div class="rightserch">
+									<input type="" name="" id="" value="" placeholder="输入ID查询" />
+									<span class="searchbtn"></span>
+								</div>
+							</div>
+							<div id="tabctn" style="padding-top: 20px;">
+								<div class="alllist"></div>
+								<div class="userlist" style="display: none;">
+									<div class="loading">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+								</div>
+								<div style="display: none;">
+									<table class="userPrdlist" style="text-align: center;">
+										<thead>
+											<tr>
+												<th>序号</th>
+												<th>ID</th>
+												<th>姓名</th>
+												<th>联系电话</th>
+												<th>待提成</th>
+											</tr>
+										</thead>
+										<tbody id="ShareList">
+
+										</tbody>
+									</table>
+									<div class="loading">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+		<script>
+			(function($) {
+				$.fn.serializeJSON = function() {
+					var obj = {};
+					var count = 0;
+					$.each(this.serializeArray(), function(i, o) {
+						var n = o.name,
+							v = o.value;
+						count++;
+						obj[n] = obj[n] === undefined ? v :
+							$.isArray(obj[n]) ? obj[n].concat(v) : [obj[n], v];
+					});
+					//obj.nameCounts = count + "";//表单name个数
+					return JSON.stringify(obj);
+				};
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.AddEvent();
+						//						this.getuserinfo();
+					},
+					getuserinfo: function() {
+						//用户信息
+						if(localStorage.getItem("token")) {
+
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/getShopMemberInfo",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									if(data.code == 0) {
+
+										if(data.data.headPortrait) {
+											$("#uesrhead").attr("src", data.data.headPortrait)
+										}
+										$("#addressDetails").val(data.data.address);
+										$("#birthday").val(data.data.birthday);
+
+										$("#province").val(data.data.province);
+										$("#province").change()
+										$("#city").val(data.data.city);
+										$("#city").change()
+										$("#country").val(data.data.country);
+										$("#idCardNo").val(data.data.idCardNo);
+										$("#realName").val(data.data.realName);
+										$("input[name='sex'][value=" + data.data.sex + "]").attr("checked", true);
+									}
+
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					},
+					AddEvent: function() {
+						$(".mbx a").click(function() {
+							$(this).addClass("active").siblings().removeClass("active")
+							var i = $(".mbx a").index(this);
+							$("#tabctn > div:eq(" + i + ")").show().siblings().hide()
+						})
+						$(".cxbtn").click(function() {
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/checkQueryPassword",
+								async: true,
+								data: {
+									token: localStorage.getItem("token"),
+									queryPassword: $("#queryPassword").val()
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										$(".cxbox").fadeOut()
+										$.ajax({
+											type: "post",
+											url: Work_Config.InterfaceDomain + "/user/getWaitingShareList",
+											async: true,
+											data: {
+												token: localStorage.getItem("token"),
+
+											},
+											success: function(data) {
+												if(data.code == 0) {
+													$(".loading").hide()
+													$(".cxbox").fadeOut()
+													var html = ''
+													if(data.data && data.data.length > 0) {
+														for(var i = 0; i < data.data.length; i++) {
+															html += "<div class=\"WaitingShareList\">" +
+																"<div>" + data.data[i].identifierId + "</div>" +
+																"<div>张三</div>" +
+																"<div>" + data.data[i].mobilePhone + "</div>" +
+																"<div id=\"" + data.data[i].id + "\" class=\"sc\"><span class=\"scbtn\">收藏</span></div>" +
+																"</div>"
+														}
+														$(".userlist").html(html)
+													}
+
+												}
+
+											},
+											error: function() {}
+
+										})
+										$.ajax({
+											type: "post",
+											url: Work_Config.InterfaceDomain + "/user/getShareList",
+											async: true,
+											data: {
+												token: localStorage.getItem("token"),
+
+											},
+											success: function(data) {
+												$(".loading").hide()
+												if(data.code == 0) {
+													$(".cxbox").fadeOut()
+													var html = ''
+													if(data.data && data.data.length > 0) {
+														for(var i = 0; i < data.data.length; i++) {
+															html += "<tr>" +
+																"<th>" + i + "</th>" +
+																"<th>" + data.data[i].identifierId + "</th>" +
+																"<th>" + data.data[i].identifierId + "</th>" +
+																"<th>" + data.data[i].identifierId + "</th>" +
+																"<th>" + data.data[i].identifierId + "</th>" +
+																"</tr>"
+
+														}
+														$("#ShareList").html(html)
+													}
+
+												}
+
+											},
+											error: function() {}
+
+										})
+									}
+
+								},
+								error: function() {}
+
+							})
+						})
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+
+			$("#distpicker2").distpicker({
+				province: "---- 所在省 ----",
+				city: "---- 所在市 ----",
+				district: "---- 所在区 ----"
+			});
+		</script>
+	</body>
+
+</html>

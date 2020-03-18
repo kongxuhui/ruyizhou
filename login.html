@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.SuperSlide.2.1.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+	</head>
+
+	<body>
+		<div class="loginbox">
+			<div class="logo">
+				<a href="index.html"><img src="img/logo.png" /></a>
+			</div>
+			<h1 class="title">会员登陆</h1>
+			<div class="forembox">
+				<input id="identifierId" type="text" placeholder="手机号码 " />
+				<input id="loginPassword" type="password" placeholder="密码" />
+				<span class="btn" id="loginbtn">登陆</span>
+				<p>
+					<a href="register.html" class="pull-left sin">免费注册</a>
+					<a href="#" class="pull-right">忘记密码?</a>
+				</p>
+			</div>
+			<div class="logincopyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</div>
+		</div>
+
+	</body>
+	<script>
+		(function($) {
+			//资源编辑页管理对象
+			var FormObj = {
+				Init: function() {
+					publc_Obj.islogin();
+					this.AddEvent()
+				},
+				//事件注册
+				AddEvent: function() {
+					$("#identifierId,#loginPassword").change(function(){
+						$(this).removeClass("redborder")
+					})
+					//登录
+                    $("#loginbtn").click(function () {
+                        var id = $("#identifierId").val();
+                        var pwd = $("#loginPassword").val();
+                        if (!id) {
+							$("#identifierId").addClass("redborder")
+							$("#identifierId").attr("placeholder", "请输入手机号")
+							return
+						}
+                        if (!pwd) {
+							$("#loginPassword").addClass("redborder")
+							$("#loginPassword").attr("placeholder", "请输入密码")
+							return
+                        }
+                        var urlKey = 'findShopUserEntitiesByMobilePhone';
+                        //var type = 'phone';
+                        //if (id.indexOf('HY') == 0 || id.indexOf('CK') == 0 || id.indexOf('JX') == 0 || id.indexOf('FX') == 0) {
+                        //    urlKey = 'userLogin';
+                        //    type = 'id';
+                        //}
+                        $.ajax({
+                            type: "post",
+                            url: Work_Config.InterfaceDomain + "/user/" + urlKey,
+                            async: true,
+                            data: {
+                                mobilePhone: id,
+                                loginPassword: pwd
+                            },
+                            success: function (data) {
+                                if (data.code == 1) {
+                                    bootbox.alert(data.message)
+                                    return;
+                                }
+                                if (data.data.length == 0) {
+                                    bootbox.alert('账号不存在');
+                                    return;
+                                }
+                                if (data.data.length > 0) {
+                                    localStorage.setItem("accountlist", JSON.stringify(data.data));
+                                    localStorage.setItem("tmpPwd", pwd);
+                                    location.href = 'SelectAccount.html';
+                                } else {
+                                    localStorage.setItem("token", data.token)
+                                    localStorage.setItem("usarData", JSON.stringify(data.data))
+                                    window.location.href = 'index.html'
+                                }
+                            },
+                            error: function () {
+
+                            }
+                        });
+					})
+				},
+				//产品分类
+				login: function() {
+
+				}
+
+			};
+			//初始化
+			FormObj.Init();
+		}(jQuery));
+	</script>
+
+</html>

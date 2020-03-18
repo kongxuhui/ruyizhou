@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />		
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" href="css/cropper.min.css">
+		<link rel="stylesheet" href="css/ImgCropping.css">
+		<link rel="stylesheet" href="css/cropper.min.css">
+		<link rel="stylesheet" href="css/ImgCropping.css">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+		<script src="js/cropper.min.js"></script>
+	</head>
+
+	<body>
+		<!--图片裁剪框 start-->
+		<div style="display: none" class="tailoring-container">
+			<div class="black-cloth" onClick="closeTailor(this)"></div>
+			<div class="tailoring-content">
+				<div class="tailoring-content-one">
+					<label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                    <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onChange="selectImg(this)">
+                    选择图片
+                </label>
+					<div class="close-tailoring" onclick="closeTailor(this)">×</div>
+				</div>
+				<div class="tailoring-content-two">
+					<div class="tailoring-box-parcel">
+						<img id="tailoringImg">
+					</div>
+					<div class="preview-box-parcel">
+						<p>图片预览：</p>
+						<div class="square previewImg"></div>
+						<div class="circular previewImg"></div>
+					</div>
+				</div>
+				<div class="tailoring-content-three">
+					<button class="l-btn cropper-reset-btn">复位</button>
+					<button class="l-btn cropper-rotate-btn">旋转</button>
+					<button class="l-btn cropper-scaleX-btn">换向</button>
+					<button class="l-btn sureCut" id="sureCut">确定</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="CkCenter-mine.html">创客中心</a>
+					<a href="">申请加盟服务店</a>
+				</div>
+				<div class="usercenter">
+					<div class="usercenter-left">
+						<ul>
+							<li class="title">创客中心</li>
+							<li class="active">
+								<a href="CkCenter-mine.html">我的创客中心</a>
+							</li>
+							<li>
+								<a href="CkCenter-info-default.html">创客信息</a>
+							</li>
+							<li>
+								<a href="CkCenter-market.html">我的市场</a>
+							</li>
+							<li>
+								<a href="CkCenter-Addid.html">创建新ID</a>
+							</li>
+							<li>
+								<a href="CkCenter-TransferAccounts.html">转账</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="title">订单中心</li>
+							<li>
+								<a href="CkCenter-orders.html">我的订单</a>
+							</li>
+							<li>
+								<a href="CkCenter-Return.html">退货</a>
+							</li>
+						</ul>
+					</div>
+					<div class="usercenter-right">
+						<div class="ctn">
+							<h1>申请加盟服务店</h1>
+							<div class="mbx">
+								<a href="CkCenter-Apply-jx.html" class="active">经销商服务店</a>
+								<a href="CkCenter-Apply-fx.html">分销商服务店</a>
+							</div>
+							<div class="searchbox ">
+								<form id="form1">
+									<div class="graybox mb3">
+										<h2 class="bartitle">目前可申请的地区</h2>
+										<div class="labellist">
+											<ul id="province">
+												<!--<li class="active">北京朝阳区</li>
+												<li>上海虹桥</li>
+												<li>天津</li>
+												<li>重庆</li>-->
+											</ul>
+										</div>
+									</div>
+									<h2 class="bartitle">店铺地址</h2>
+									<div class="addressform">
+										<!--<select>
+											<option>省</option>
+										</select>-->
+										<select id="city" style="width: 150px;">
+											<option>市</option>
+										</select>
+										<select id="county" style="width: 150px;">
+											<option>区/县</option>
+										</select>
+										<input class="input" id="addressDetails" placeholder="请输入店铺详细地址" />
+										<div class="clearfix">
+
+										</div>
+									</div>
+									<h2 class="bartitle">选择首货款</h2>
+									<div class="labellist">
+										<ul id="level">
+											<li class="active" val="2">20及以上</li>
+											<li val="3">50万及以上</li>
+										</ul>
+									</div>
+									<p class="brown pt2 pb2">注：会员取货，可获得8%的服务费；社区店进货，可获得3%的服务费</p>
+									<h2 class="bartitle">店铺联系信息</h2>
+									<ul>
+										<li>
+											<div class="lable">
+												<span>联系人姓名：</span>
+											</div>
+											<input name="principals" id="principals" class="biginput biginput" placeholder="请填写真实姓名" />
+										</li>
+										<li style="margin-bottom: 0;">
+											<div class="lable">
+												<span>联系人电话：</span>
+											</div>
+											<input name="principalsTel" id="principalsTel" class="biginput biginput" placeholder="请填写真实手机号" />
+										</li>
+										<li>
+											<div class="lable">
+												<span>联系人微信号：</span>
+											</div>
+											<input name="principalsWx" id="principalsWx" class="biginput biginput" placeholder="请填写真实微信号" />
+										</li>
+										<li>
+											<div class="lable">
+												<span>店铺名称：</span>
+											</div>
+											<input name="shopName" id="shopName" class="biginput biginput" placeholder="请填写店铺名称" />
+										</li>
+									</ul>
+									<h2 class="bartitle">店铺证件</h2>
+									<ul>
+										<li>
+
+											<div class="picupdatabox">
+												<div class="picupdata" id="businessLicensebg"></div>
+												<div class="updatabtn" id="yyzz">
+													<!--<input type="file" id="businessLicense" />-->
+													立即上传
+												</div>
+												<p class="zjtitle">营业执照</p>
+											</div>
+
+											<div class="picupdatabox">
+												<div class="picupdata" id="foodBusinessLicensebg"></div>
+												<div class="updatabtn" id="spxkz">
+													<!--<input type="file" id="foodBusinessLicense" />-->
+													立即上传
+												</div>
+												<p class="zjtitle">食品经营许可证</p>
+											</div>
+
+										</li>
+										<p class="brown pt2 pb2">注：营业执照、食品经营许可证，必须再一个月以内完成上传</p>
+									</ul>
+									<div class="orderbottom">
+
+										<b class="paybtn" id="sendbtn" style="float: left;">确定</b>
+									</div>
+									<div class="clearfix"></div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+		<script>
+			(function($) {
+
+				var level = 1;
+				var parentId = 1;
+				var dom = $("#province");
+				$.fn.serializeJSON = function() {
+					var obj = {};
+					var count = 0;
+					$.each(this.serializeArray(), function(i, o) {
+						var n = o.name,
+							v = o.value;
+						count++;
+						obj[n] = obj[n] === undefined ? v :
+							$.isArray(obj[n]) ? obj[n].concat(v) : [obj[n], v];
+					});
+					//obj.nameCounts = count + "";//表单name个数
+					return JSON.stringify(obj);
+				};
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.AddEvent();
+						this.getuserinfo();
+						this.getShopOpenRegionName()
+					},
+					getuserinfo: function() {
+						//用户信息
+						if(localStorage.getItem("token")) {
+
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/getShopMemberInfo",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									if(data.code == 0) {
+
+										if(data.data.headPortrait) {
+											$("#uesrhead").attr("src", data.data.headPortrait)
+										}
+										$("#addressDetails").val(data.data.address);
+										$("#birthday").val(data.data.birthday);
+
+										$("#province").val(data.data.province);
+										$("#province").change()
+										$("#city").val(data.data.city);
+										$("#city").change()
+										$("#country").val(data.data.country);
+										$("#idCardNo").val(data.data.idCardNo);
+										$("#realName").val(data.data.realName);
+										$("input[name='sex'][value=" + data.data.sex + "]").attr("checked", true);
+									}
+
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					},
+					getShopOpenRegionName: function() {
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/region/getShopOpenRegionName",
+							async: true,
+							data: {
+								level: 1,
+								parentId: 1
+							},
+							success: function(data) {
+								if(data.code == 0) {
+									var pricehtml = ""
+									for(var i = 0; i < data.data.length; i++) {
+
+										pricehtml += "<li id=\"" + data.data[i].id + "\">" + data.data[i].regionName + "</li>"
+									}
+									$("#province").html(pricehtml)
+									$("#province li:eq(0)").trigger("click")
+
+								}
+
+							},
+							error: function() {
+
+							}
+						});
+					},
+					getArea: function(level, parentId, dom) {
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/region/getShopOpenRegionName",
+							async: true,
+							data: {
+								level: level,
+								parentId: parentId
+							},
+							success: function(data) {
+								if(data.code == 0) {
+									var optionhtml = "";
+									for(var i = 0; i < data.data.length; i++) {
+										optionhtml += "<option value=\"" + data.data[i].id + "\">" + data.data[i].regionName + "</option>";
+									}
+									dom.append(optionhtml)
+									dom.change()
+
+								}
+
+							},
+							error: function() {}
+
+						})
+
+					},
+					AddEvent: function() {
+						var self = this;
+						$("#sendbtn").click(function() {
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/shop/applyShopStore",
+								async: true,
+								data: {
+									token: localStorage.getItem("token"),
+									province: $("#province .active").attr("id"),
+									city: $("#city").val(),
+									county: $("#county").val(),
+									addressDetails: $("#shopName").val(),
+									level: $("#level .active").attr("val"),
+									principals: $("#shopName").val(),
+									principalsTel: $("#shopName").val(),
+									principalsWx: $("#shopName").val(),
+									businessLicense: localStorage.getItem("businessLicense"),
+									foodBusinessLicense: localStorage.getItem("foodBusinessLicense"),
+									shopName: $("#shopName").val()
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										var dialog = bootbox.dialog({
+											title: '温馨提示',
+											message: "<div><h2 class=\"text-center \"><br/><br/>提交成功，并已将您升级为经销商！ 请使用创客账号重新登录<br/><br/><br/></h2></div>",
+											size: 'middle',
+
+											buttons: {
+												noclose: {
+													label: "重新登录",
+													className: 'btn-info btn-block col-6 center-block ma  ',
+													callback: function() {
+														window.location.href = 'index.html'
+													}
+												}
+											}
+
+										})
+
+									} else {
+										bootbox.alert(data.message)
+									}
+
+								},
+								error: function() {}
+
+							})
+						})
+						$("body #province").on("click", "li", function() {
+							$(this).addClass("active")
+							$(this).siblings().removeClass("active")
+							parentId = ($(this).attr("id"))
+							level = 2;
+							dom = $("#city");
+							$("#city").html("")
+							self.getArea(level, parentId, dom);
+							$("#city").change()
+
+						})
+						$("#city").change(function() {
+							parentId = $(this).val()
+							level = 3;
+							dom = $("#county");
+							$("#county").html("")
+							self.getArea(level, parentId, dom);
+
+						})
+						$("#level li").click(function() {
+							$(this).addClass("active").siblings().removeClass("active")
+						})
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+
+			//上传插件
+			//弹出框水平垂直居中
+
+			(window.onresize = function() {
+				var win_height = $(window).height();
+				var win_width = $(window).width();
+				if(win_width <= 768) {
+					$(".tailoring-content").css({
+						"top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+						"left": 0
+					});
+				} else {
+					$(".tailoring-content").css({
+						"top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+						"left": (win_width - $(".tailoring-content").outerWidth()) / 2
+					});
+				}
+			})();
+			var businessLicense;
+			var foodBusinessLicense;
+			var zjid;
+			//弹出图片裁剪框
+			$(".updatabtn").on("click", function() {
+
+				zjid = $(this).attr("id")
+				
+				$(".tailoring-container").toggle();
+			});
+			//图像上传
+			function selectImg(file) {
+				if(!file.files || !file.files[0]) {
+					return;
+				}
+				var reader = new FileReader();
+				reader.onload = function(evt) {
+					var replaceSrc = evt.target.result;
+					//更换cropper的图片
+					$('#tailoringImg').cropper('replace', replaceSrc, false); //默认false，适应高度，不失真
+				}
+				reader.readAsDataURL(file.files[0]);
+			}
+			//cropper图片裁剪
+			$('#tailoringImg').cropper({
+//				aspectRatio: 1 / 1, //默认比例
+				preview: '.previewImg', //预览视图
+				guides: false, //裁剪框的虚线(九宫格)
+				autoCropArea: 0.5, //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+				movable: false, //是否允许移动图片
+				dragCrop: true, //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+				movable: true, //是否允许移动剪裁框
+				resizable: true, //是否允许改变裁剪框的大小
+				zoomable: false, //是否允许缩放图片大小
+				mouseWheelZoom: false, //是否允许通过鼠标滚轮来缩放图片
+				touchDragZoom: true, //是否允许通过触摸移动来缩放图片
+				rotatable: true, //是否允许旋转图片
+				crop: function(e) {
+					// 输出结果数据裁剪图像。
+				}
+			});
+			//旋转
+			$(".cropper-rotate-btn").on("click", function() {
+				$('#tailoringImg').cropper("rotate", 45);
+			});
+			//复位
+			$(".cropper-reset-btn").on("click", function() {
+				$('#tailoringImg').cropper("reset");
+			});
+			//换向
+			var flagX = true;
+			$(".cropper-scaleX-btn").on("click", function() {
+				if(flagX) {
+					$('#tailoringImg').cropper("scaleX", -1);
+					flagX = false;
+				} else {
+					$('#tailoringImg').cropper("scaleX", 1);
+					flagX = true;
+				}
+				flagX != flagX;
+			});
+
+			//裁剪后的处理
+			$("#sureCut").on("click", function() {
+				if($("#tailoringImg").attr("src") == null) {
+					return false;
+				} else {
+					var cas = $('#tailoringImg').cropper('getCroppedCanvas'); //获取被裁剪后的canvas
+					var base64url = cas.toDataURL("image/jpeg", 0.5); //转换为base64地址形式
+					$("#uesrhead").prop("src", base64url); //显示为图片的形式
+					$.ajax({
+						type: "post",
+						url: Work_Config.uploadpic + "/uploadBase64",
+						async: true,
+						data: {
+							base64Data: base64url
+						},
+						success: function(data) {
+							if(data.code == 0) {
+								if(zjid == "yyzz") {
+									businessLicense = data.data.imgPathBig;
+									localStorage.setItem("businessLicense",businessLicense)
+									$("#businessLicensebg").html("<img src='" + data.data.imgPathBig + "' />")
+									
+								}
+								if(zjid == "spxkz") {
+									$("#foodBusinessLicensebg").html("<img src='" + data.data.imgPathBig + "' />")
+									foodBusinessLicense = data.data.imgPathBig
+									localStorage.setItem("foodBusinessLicense",foodBusinessLicense)
+								}
+
+							}
+							if(data.code == 100) {
+								//										window.location.href = "login.html"
+							}
+							publc_Obj.message(data.message)
+
+						},
+						error: function() {}
+
+					})
+					//关闭裁剪框
+					closeTailor();
+				}
+			});
+			//关闭裁剪框
+			function closeTailor() {
+				$(".tailoring-container").toggle();
+			}
+		</script>
+	</body>
+
+</html>

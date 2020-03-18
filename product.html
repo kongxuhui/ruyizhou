@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.SuperSlide.2.1.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="" id="keyword"></a>
+					<a href="" class="prdtitle"> </a>
+				</div>
+				<div class="producttop" style="margin-top: 0;">
+					<div class="producttop_left">
+						<div class="picFocus">
+							<div class="bd">
+								<ul>
+									<li>
+										<a target="_blank" href="#"><img src="" id="bg1" /></a>
+									</li>
+									<li>
+										<a target="_blank" href="#"><img src="" id="bg2" /></a>
+									</li>
+									<li>
+										<a target="_blank" href="#"><img src="" id="bg3" /></a>
+									</li>
+									<li>
+										<a target="_blank" href="#"><img src="" id="bg4" /></a>
+									</li>
+									<li>
+										<a target="_blank" href="#"><img src="" id="bg5" /></a>
+									</li>
+								</ul>
+							</div>
+
+							<div class="hd">
+								<ul>
+									<li><img src="" id="sm1" /></li>
+									<li><img src="" id="sm2" /></li>
+									<li><img src="" id="sm3" /></li>
+									<li><img src="" id="sm4" /></li>
+									<li><img src="" id="sm5" /></li>
+								</ul>
+							</div>
+
+						</div>
+					</div>
+					<div class="producttop_right">
+						<h1 id="name"></h1>
+						<div class="pordinfo">
+							<div class="ctn">
+								<P><span class="pram">售价</span><span class="money" id="price"></span></P>
+								<P><span class="pram">积分</span><span id="price2">500</span></P>
+								<P><span class="pram">兑货券积分</span><span id="promotionPrice"></span></P>
+								<P><span class="pram">规格</span><span id="specification"></span></P>
+							</div>
+						</div>
+						<div class="addbox">
+							<span>数量</span>
+							<div class="btnbox">
+								<span class="jian">-</span><input type="text" class="shu" value="1" /><span class="jia">+</span>
+							</div>
+						</div>
+						<a href="javascript:void(0)" class="buybtn">加入购物车</a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="productbox">
+					<div class="ctn">
+						<h2 class="titlebar">产品详情</h2>
+						<div class="title" id="description"></div>
+
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+		<script>
+			(function($) {
+				var if_promotion;
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						this.getproducBykeywords()
+						this.ADDEvent();
+						this.getProducById();
+
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+
+					},
+					getproducBykeywords: function() {
+						var Paramer = GetPageParamer("name")
+						var keywords = decodeURI(Paramer)
+						let newkeywords = encodeURI(encodeURI(keywords));
+						var productCategoryId = GetPageParamer('productCategoryId')
+
+						$("#keyword").html(decodeURI(keywords))
+						$("#keyword").attr("href", 'category.html?productCategoryId=' + productCategoryId + "&name=" + newkeywords)
+
+					},
+					getProducById: function() {
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/product/getProducById",
+							async: true,
+							data: {
+								id: getQueryString("id")
+
+							},
+							success: function(data) {
+								if(data.code == 0) {
+									if(data.data.if_promotion==false)
+									{
+										if_promotion =0;
+									}
+									else{
+										if_promotion =1;
+									}
+									 
+									$("#name").html(data.data.name)
+									$("#description").html(data.data.description)
+									$("#specification").html(data.data.specification)
+									$("#price").html(data.data.price + "元")
+									$("#price2").html(data.data.price)
+									$(".prdtitle").html(data.data.name)
+									
+									$("#promotionPrice").html(data.data.promotionPrice)
+									$("#name").html(data.data.name)
+									$("#sm1").attr("src", data.data.albumPicslSmall)
+									$("#sm2").attr("src", data.data.albumPics2Small)
+									$("#sm3").attr("src", data.data.albumPics3Small)
+									$("#sm4").attr("src", data.data.albumPics4Small)
+									$("#sm5").attr("src", data.data.albumPics5Small)
+
+									$("#bg1").attr("src", data.data.albumPics1Big)
+									$("#bg2").attr("src", data.data.albumPics2Big)
+									$("#bg3").attr("src", data.data.albumPics3Big)
+									$("#bg4").attr("src", data.data.albumPics4Big)
+									$("#bg5").attr("src", data.data.albumPics5Big)
+
+								}
+								if(data.code == 1) {
+									window.location.href = 'login.html'
+								} else {
+									$(".tpsbox .message").html(data.message);
+								}
+							},
+							error: function() {
+
+							}
+						});
+					},
+					ADDEvent: function() {
+						$(".buybtn").click(function() {
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/product/saveShopCar",
+								async: true,
+								data: {
+									token: localStorage.getItem("token"),
+									bank: $("#bank").val(),
+									productId: GetPageParamer("id"),
+									productCount: $(".shu").val(),
+									payMode: 0
+
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										publc_Obj.message(data.message)
+										window.location.href='cart.html'
+
+									} 
+									if(data.code==1) {
+										 window.location.href="login.html"
+									}
+								},
+								error: function() {
+
+								}
+							});
+						})
+						$(".jia").click(function() {
+							$(this).prev().val(parseInt($(this).prev().val()) + 1);
+						})
+						$(".jian").click(function() {
+							$(this).next().val(parseInt($(this).next().val()) - 1);
+							if(parseInt($(this).next().val()) == 0) {
+								$(this).next().val(1)
+							}
+						})
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+
+			jQuery(".slideBox").slide({
+				mainCell: ".bd ul",
+				autoPlay: true
+			});
+		</script>
+		<script type="text/javascript">
+			jQuery(".picFocus").slide({
+				mainCell: ".bd ul",
+				effect: "fade",
+				autoPlay: true
+			});
+		</script>
+	</body>
+
+</html>

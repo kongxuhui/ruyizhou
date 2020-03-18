@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+
+	</head>
+
+	<body>
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="ShopCenter-mine.html">店铺中心</a>
+
+				</div>
+				<div class="usercenter">
+					<div class="usercenter-left">
+						<ul>
+							<li class="title">店铺中心</li>
+							<li class="active">
+								<a href="ShopCenter-mine.html">我的店铺</a>
+							</li>
+							<li>
+								<a href="ShopCenter-info-default.html">店铺信息</a>
+							</li>
+							<li>
+								<a href="ShopCenter-kucun.html">店铺库存</a>
+							</li>
+							<li>
+								<a href="ShopCenter-jinhuo.html">进货</a>
+							</li>
+							<li>
+								<a href="ShopCenter-TransferAccounts.html">转账</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="title">订单中心</li>
+							<li>
+								<a href="ShopCenter-jhorders.html">进货单</a>
+							</li>
+							<li>
+								<a href="ShopCenter-qhorders.html">取货订单管理</a>
+							</li>
+							<li>
+								<a href="ShopCenter-thorders.html">退货订单管理</a>
+							</li>
+							<li>
+								<a href="ShopCenter-myReturn.html">退货</a>
+							</li>
+						</ul>
+					</div>
+					<div class="usercenter-right">
+						<a href="ShopCenter-info-default.html" class="edittext editinfo">修改店铺信息</a>
+						<div class="ctn">
+							<div class="searchbox " style="padding-top: 20px;">
+								<div class="headbox">
+									<div class="head">
+										<img src="img/face2.png" id="uesrhead" />
+									</div>
+                                    <div class="h-r">
+                                        <span class="id" id="identifierId">店铺ID：JX13718786204</span>
+                                        <span class="bq" style="margin-left: 20px; margin-top: -5px;" id="level">经销商服务店</span>
+                                        <span class="store_prop">店铺名称：XXXX经销商服务店</span>
+                                        <span class="store_prop">联系电话：15115887874</span>
+                                        <span class="store_prop">店铺地址：江西省赣州市XXXXXX开发区112号</span>
+                                    </div>
+
+								</div>
+								<hr />
+
+								<div class="clearfix"></div>
+							</div>
+							<div class="jf">
+								<ul>
+									<li>
+										<div><span class="f16" style="margin-right: 10px; ">积分余额</span>
+											<a href="#" class="edittext" style="float: none;font-size: 12px;">积分明细</a>
+										</div>
+										<div><span class="bgtext" id="bonus">0</span></div>
+										<div>冻结：<span id="frozenBonus">0</span> </div>
+
+										<!-- 点击充值提现弹框 -->
+										<div>
+											<!-- <a href="#" class="bottombtn bottombtn2" id="recharge">充值</a> -->
+											<button type="button" class="bottombtn bottombtn2" data-toggle="modal" data-target="#myModal">充值</button>
+											<!-- 充值模态框 -->
+											<div class="modal fade" id="myModal">
+												<div class="modal-dialog">
+													<div class="modal-content">
+	
+														<!-- 模态框头部 -->
+														<div class="modal-header">
+															<h4 class="modal-title">充值积分 <span> (1积分=1元)</span></h4>
+															<button type="button" class="close" data-dismiss="modal">&times</button>
+														</div>
+	
+														<!-- 模态框主体 -->
+														<div class="modal-body">
+															<span>充值金额</span>
+															<input onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" maxlength="5" type="text" placeholder="请输入充值的金额" class="amountOfMoney">
+															<div>
+																<button id="wxpay"></button>
+																<button id="alipay"></button>
+															</div>
+														</div>
+	
+														<!-- 模态框底部 -->
+														<!-- <div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+														</div> -->
+	
+													</div>
+												</div>
+											</div>
+											<button type="button" class="bottombtn bottombtn2" data-toggle="modal" data-target="#myModal_1" id="getBank">提现</button>
+											<!-- 提现模态框 -->
+											<div class="modal fade" id="myModal_1">
+												<div class="modal-dialog">
+													<div class="modal-content">
+	
+														<!-- 模态框头部 -->
+														<div class="modal-header">
+															<button type="button" class="close" data-dismiss="modal">&times</button>
+														</div>
+	
+														<h4 class="modal-title">申请提现</span></h4>
+	
+														<!-- 模态框主体 -->
+														<div class="modal-body">
+															<div>
+																<span>提现金额</span>
+																<input onkeyup="value=value.replace(/^(0+)|[^\d]{3,}}/g,'')" maxlength="5" type="text" placeholder="输入提现金额，必须大于100元" class="amountOfMoney_1">
+																<span class="yibai"></span>
+															</div>
+															<div>
+																<p>您可提现余额：<span id="balance"></span> 元，提交之后将3个工作日完成提现;</p>
+																<p>提现前请检查个人中心的基本资料已经填写了<span>真实姓名</span>和<span>银行账户</span></p>
+															</div>
+															<button class="getMoney" id="getMoney">确认提款</button>
+														</div>
+														
+	
+														<!-- 模态框底部 -->
+														<!-- <div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+														</div> -->
+	
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div><span class="f16" style="margin-right: 10px; ">兑换券积余额</span>
+                                             <a href="#" class="edittext" style="float: none;font-size: 12px;">兑换券积分明细</a>
+										</div>
+										<div><span class="bgtext" id="coupon">0</span></div>
+										<div>冻结：<span accesskey="frozen__coupon"> 0</span> </div>
+
+										<!--<div>
+											<a href="#" class="bottombtn">兑换商品</a>
+
+										</div>-->
+									</li>
+								</ul>
+							</div>
+							<hr />
+							<h4 class="ggtitle">公告</h4>
+							<div class="gglist">
+								<ul>
+									<!--<li><a href="">. 新系统正式上线</a></li>
+									<li><a href="">. 会员消费满380可升级为创客</a></li>
+									<li><a href="">. 北京经销商申请开放</a></li>
+									<li><a href="">. 新系统正式上线</a></li>
+									<li><a href="">. 会员消费满380可升级为创客</a></li>
+									<li><a href="">. 北京经销商申请开放</a></li>-->
+								</ul>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			(function($) {
+
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.getuserinfo();
+						this.getnotice();
+					},
+					getnotice: function() {
+						//用户信息						
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/admin/notice/list",
+							async: true,
+							data: {
+								type: 0,
+								state: 0,
+								userType: 3
+							},
+							success: function(data) {
+								if(data.code == 0) {
+									var noticelist = ''
+									for(var i = 0; i < data.data.length; i++) {
+										noticelist += "<li ><a target=\"_blank\" href=\"notice_content.html?id=" + data.data[i].id + "\">. " + data.data[i].title + "</a></li>"
+									}
+									$(".gglist ul").html(noticelist)
+								}
+							},
+							error: function() {
+
+							}
+						});
+
+					},
+					getuserinfo: function() {
+						//用户信息
+						if(localStorage.getItem("token")) {
+
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/shop/getShopStore",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										if(data.data.headPortrait) {
+											$("#uesrhead").attr("src", data.data.headPortrait)
+										}
+										//$("#level").html("会员" + data.data.level + "级")
+										$.ajax({
+											type: "post",
+											url: Work_Config.InterfaceDomain + "/shop/getShopStoreDetailByUserId",
+											async: true,
+											data: {
+												id: data.data.id
+											},
+											success: function(data) {
+												if(data.code == 0) {
+
+													$("#identifierId").html("店铺ID:" + data.data.identifierId)
+													$("#shopInfo").html("店铺名称：" + data.data.shopName + "<br />" +
+														//										"店铺ID:"+data.data.identifierId+"<br />" +
+														"联系电话：" + data.data.principalsTel + "<br />" +
+														"联系地址：" + data.data.addressDetails + "")
+
+												}
+												if(data.code == 1) {
+													window.location.href = 'login.html'
+												} else {
+													//										$(".tpsbox .message").html(data.message);
+												}
+											},
+											error: function() {}
+
+										})
+									}
+
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+		</script>
+	</body>
+
+</html>

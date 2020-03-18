@@ -1,0 +1,328 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <title></title>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/distpicker.data.js"></script>
+    <script src="js/distpicker.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/public.js"></script>
+
+</head>
+
+<body>
+    <div class="main">
+        <script src="js/header.js"></script>
+        <!--修改库存-->
+        <div class="ctn unit_tip update_kucun_dialog" id="editKucun">
+            库存
+            <p class="btnbox w200 no_float">
+                <a href="javascript:void(0)" class="jian">-</a>
+                <input type="number" class="shu" value="1">件
+                <a href="javascript:void(0)" class="jia">+</a>
+            </p>
+            <span class="btn" id="sendyhk">确认修改</span>
+            <p>注：请不要虚报库存数，如会员取货发现无货将会被举报，举报将会罚款或取消加盟资格。</p>
+        </div>
+        <div class="container">
+            <div class="Bread">
+                <a href="index.html">首页</a>
+                <a href="ShopCenter-mine.html">店铺中心</a>
+                <a href="">店铺库存</a>
+
+            </div>
+            <div class="usercenter">
+                <div class="usercenter-left">
+                    <ul>
+                        <li class="title">店铺中心</li>
+                        <li>
+                            <a href="ShopCenter-mine.html">我的店铺</a>
+                        </li>
+                        <li>
+                            <a href="ShopCenter-info-default.html">店铺信息</a>
+                        </li>
+                        <li class="active">
+                            <a href="ShopCenter-kucun.html">店铺库存</a>
+                        </li>
+                        <li>
+                            <a href="ShopCenter-jinhuo.html">进货</a>
+                        </li>
+                        <li>
+                            <a href="ShopCenter-TransferAccounts.html">转账</a>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="title">店铺库存</li>
+                        <li>
+                            <a href="ShopCenter-jhorders.html">进货单</a>
+                        </li>
+                        <li>
+                            <a href="ShopCenter-qhorders.html">取货订单管理</a>
+                        </li>
+                        <li>
+                            <a href="ShopCenter-thorders.html">退货订单管理</a>
+                        </li>
+                        <li>
+                            <a href="ShopCenter-myReturn.html">退货</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="usercenter-right">
+                    <div class="ctn">
+                        <h1>店铺库存</h1>
+                        <div class="mbx">
+                            <a href="ShopCenter-info-default.html" class="active">白酒</a>
+                            <a href="ShopCenter-info.html">红酒</a>
+                            <a href="ShopCenter-info.html">啤酒</a>
+                            <a href="ShopCenter-info.html">保健酒</a>
+                            <a href="ShopCenter-info.html">饮料</a>
+                            <a href="ShopCenter-info.html">粮油</a>
+                            <a href="ShopCenter-info.html">茶叶</a>
+                            <a href="ShopCenter-info.html">其他</a>
+                        </div>
+                        <table class="userPrdlist">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: center;">主图</th>
+                                    <th>名称</th>
+                                    <th>价格</th>
+                                    <th>PV值</th>
+                                    <th>兑换积分</th>
+                                    <th>
+                                        进/消(件)<span class="help" id="js_kucun_unit_desc">
+                                            ?
+                                            <span id="unit_tip" class="unit_tip">
+                                                <i>进/销 说明</i>
+                                                <i>1、店铺进化多少件,将增加多少件;</i>
+                                                <i>2、店铺销售多少件,将减少多少件;</i>
+                                                <i class="last_i_first last_i">注：退货将根据进销件数，进行退货;</i>
+                                                <i class="last_i">如无过销件数，将不给予退货;</i>
+                                            </span>
+                                        </span>
+                                    </th>
+                                    <th>库存(含兑换)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th class="picspan"><img src="img/01.png" </th>
+                                    <th class="prdtitle">42度陈酿白酒<small>4X500ml 整箱</small></th>
+                                    <th><span class="brown">￥260</span></th>
+                                    <th>260</th>
+                                    <th>380</th>
+                                    <th>50</th>
+                                    <th>100</th>
+                                    <th>
+                                        <a href="#" class="brown js_btn_edit_kucun">修改库存</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th><img src="img/01.png" </th>
+                                    <th class="prdtitle">2斤装瓷坛原浆52度地方特产纯粮原浆白酒<small>4X500ml 整箱</small></th>
+                                    <th><span class="brown">￥260</span></th>
+                                    <th>260</th>
+                                    <th>380</th>
+                                    <th>50</th>
+                                    <th>100</th>
+                                    <th>
+                                        <a href="#" class="brown js_btn_edit_kucun">修改库存</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="picspan"><img src="img/01.png" </th>
+                                    <th class="prdtitle">42度陈酿白酒<small>4X500ml 整箱</small></th>
+                                    <th><span class="brown">￥260</span></th>
+                                    <th>260</th>
+                                    <th>380</th>
+                                    <th>50</th>
+                                    <th>100</th>
+                                    <th>
+                                        <a href="#" class="brown js_btn_edit_kucun">修改库存</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th><img src="img/01.png" </th>
+                                    <th class="prdtitle">2斤装瓷坛原浆52度地方特产纯粮原浆白酒<small>4X500ml 整箱</small></th>
+                                    <th><span class="brown">￥260</span></th>
+                                    <th>260</th>
+                                    <th>380</th>
+                                    <th>50</th>
+                                    <th>100</th>
+                                    <th>
+                                        <a href="#" class="brown js_btn_edit_kucun">修改库存</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="picspan"><img src="img/01.png" </th>
+                                    <th class="prdtitle">42度陈酿白酒<small>4X500ml 整箱</small></th>
+                                    <th><span class="brown">￥260</span></th>
+                                    <th>260</th>
+                                    <th>380</th>
+                                    <th>50</th>
+                                    <th>100</th>
+                                    <th>
+                                        <a href="#" class="brown js_btn_edit_kucun">修改库存</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th><img src="img/01.png" </th>
+                                    <th class="prdtitle">2斤装瓷坛原浆52度地方特产纯粮原浆白酒<small>4X500ml 整箱</small></th>
+                                    <th><span class="brown">￥260</span></th>
+                                    <th>260</th>
+                                    <th>380</th>
+                                    <th>50</th>
+                                    <th>100</th>
+                                    <th>
+                                        <a href="#" class="brown js_btn_edit_kucun">修改库存</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="picspan"><img src="img/01.png" </th>
+                                    <th class="prdtitle">42度陈酿白酒<small>4X500ml 整箱</small></th>
+                                    <th><span class="brown">￥260</span></th>
+                                    <th>260</th>
+                                    <th>380</th>
+                                    <th>50</th>
+                                    <th>100</th>
+                                    <th>
+                                        <a href="#" class="brown js_btn_edit_kucun">修改库存</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th><img src="img/01.png" </th>
+                                    <th class="prdtitle">2斤装瓷坛原浆52度地方特产纯粮原浆白酒<small>4X500ml 整箱</small></th>
+                                    <th><span class="brown">￥260</span></th>
+                                    <th>260</th>
+                                    <th>380</th>
+                                    <th>50</th>
+                                    <th>100</th>
+                                    <th>
+                                        <a href="#" class="brown js_btn_edit_kucun">修改库存</a>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="page">
+                            <ul>
+                                <li>上一页</li>
+                                <li>1</li>
+                                <li class="active">2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                                <li>下一页</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!--<div class="clearfix"></div>-->
+        </div>
+        <div class="clearfix"></div>
+        <div class="footer">
+            <div class="container">
+                <ul>
+                    <li><span>如意洲官网</span></li>
+                    <li><span>7天无理由退货</span></li>
+                    <li><span>15天免费换货</span></li>
+                    <li><span>购物享更多优惠</span></li>
+                    <li><span>全国服务店网点</span></li>
+                </ul>
+                <p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        (function ($) {
+
+            //资源编辑页管理对象
+            var FormObj = {
+                Init: function () {
+                    publc_Obj.islogin();
+                    publc_Obj.AddEvent();
+                    this.AddEvent();
+                    this.getuserinfo();
+
+                    //$('#js_kucun_unit_desc').mouseover(function () {
+                    //    $(this).find('#unit_tip').show();
+                    //}).mouseout(function () {
+                    //    $(this).find('#unit_tip').hide();
+                    //})
+                    $(document.body).delegate('.js_btn_edit_kucun', 'click', function () {
+                        var obj = $("#editKucun");
+                        obj.css({ 'left': '-230px','top':'58px'}).appendTo($(this).parent()).fadeIn();
+                    })
+                },
+                AddEvent: function () {
+
+                },
+                getuserinfo: function () {
+                    //用户信息
+                    if (localStorage.getItem("token")) {
+
+                        $.ajax({
+                            type: "post",
+                            url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+                            async: true,
+                            data: {
+                                token: localStorage.getItem("token")
+                            },
+                            success: function (data) {
+                                if (data.code == 0) {
+
+                                    $("#bankCardNumbertxt").html(data.data.bankCardNumber);
+                                    $("#emailtxt").html(data.data.email);
+                                    $("#mobilePhonetxt").html(data.data.mobilePhone);
+                                    if (!data.data.bank) {
+                                        $("#yhkpic").attr("src", "img/ykard2.png");
+                                        $("#bankAccountName").html("暂未添加银行卡");
+                                        $("#yhkpic").attr("src", "img/ykard2.png");
+                                    } else {
+                                        var bankname = ""
+                                        $("#bank option").each(function () {
+                                            if ($(this).attr("value") == data.data.bank) {
+                                                bankname = $(this).text()
+
+                                            }
+                                        })
+                                        $("#bankAccountNametxt").html(bankname);
+                                        //$("#bankAccountName").html(bankAccountName);
+                                        //$("#bankCardNumber").html(bankCardNumber  );
+
+                                    }
+                                    //
+
+                                }
+
+                            },
+                            error: function () {
+
+                            }
+                        });
+
+                    }
+
+                }
+
+            };
+            //初始化
+            FormObj.Init();
+        }(jQuery));
+        $("#distpicker2").distpicker({
+            province: "---- 所在省 ----",
+            city: "---- 所在市 ----",
+            district: "---- 所在区 ----"
+        });
+    </script>
+</body>
+
+</html>

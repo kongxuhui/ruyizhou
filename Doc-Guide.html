@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title>操作指南</title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+		
+		<style type="text/css">
+			.document-container {
+				width: 1200px;
+				margin: 0 auto 20px;
+				overflow: hidden;
+			}
+			
+			.document-container .left-section {
+				float: left;
+				width: 930px;
+				box-sizing: border-box;
+				padding: 40px;
+				background-color: #fff;
+				min-height: 500px;
+			}
+			
+			.document-container .right-section {
+				float: right;
+				width: 250px;
+				box-sizing: border-box;
+				/* padding: 20px; */
+				background-color: #fff;
+			}
+			
+			.doc-header {
+				font-size: 30px;
+				color: #666;
+				line-height: 1.5;
+				text-align: center;
+				font-weight: bold;
+			}
+			
+			.doc-resource {
+				text-align: center;
+				color: #999999;
+				font-size: 12px;
+				margin-top: 15px;
+				line-height: 1.2;
+			}
+			
+			.doc-content {
+				margin-top: 50px;
+				font-size: 16px;
+				color: #666;
+				line-height: 2.25;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="tpsbox">
+			<div class="bar"><span>修改密码</span><i class="close"></i></div>
+			<div class="ctn">
+				<input type="text" />
+				<input type="text" />
+				<a href="#" class="btn"></a>
+			</div>
+		</div>
+		<div class="tpsbox_bg"></div>
+		
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="document-container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="UserCenter-mine.html">操作指南</a>
+				</div>
+				
+				<div class="doc-container">
+					<div class="left-section">
+						<!-- article -->
+						<div id="article">
+							<div class="loadingbox" style="display: block;">
+								<div class="loading">
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+									<span></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="right-section">
+						<div class="noticebox">
+							<span class="rightTitle">操作指南</span>
+							
+							<ul id="docList">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="clearfix"></div>
+			
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			(function($) {
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						
+						this.getDocs();
+						this.getNotice();
+					},
+					
+					// 操作指南
+					getDocs: function () {
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/admin/notice/list",
+							async: true,
+							data: {
+								type: 1,
+								state: 0
+							},
+							success (resp) {
+								var arr = [];
+								var html = '';
+					
+								if (resp.code === 0) {
+									for (var i = 0; i < resp.data.length; i++) {
+										arr.push(
+											'<li>\
+												<a target="_blank" href="Doc-Guide.html?id=' + resp.data[i].id + '&type=1">·' + resp.data[i].title + ' </a>\
+											</li>'
+										)
+									}
+									
+									$('#docList').html(arr.join(''))
+								}
+							}
+						});
+					},
+					
+					getNotice () {
+						var $article = $('#article');
+						
+						$.ajax({
+							type: "get",
+							url: Work_Config.InterfaceDomain + "/admin/notice/get",
+							async: true,
+							data: {
+								id: getQueryString('id')
+							},
+							success: function(resp) {
+								var htmlArray = []
+								var ct = resp.data
+								
+								if (resp.code !== 0) {
+									$article.empty().html('<div class="err-message">' + resp.message + '</div>')
+									return
+								}
+								
+								htmlArray.push('<h1 class="doc-header">' + ct.title + '</h1>')
+								htmlArray.push('<div class="doc-resource">' + ct.createDate + '</div>')
+								htmlArray.push('<div class="doc-content">' + ct.content + '</div>')
+								
+								$article.empty().html(htmlArray.join(''))
+							},
+							error: function() {
+
+							}
+						});
+					}
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+		</script>
+	</body>
+
+</html>

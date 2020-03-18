@@ -1,0 +1,72 @@
+<html>
+
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Insert title here</title>
+
+
+<body>
+<div style="text-align: center;">
+<canvas id="thecanvas" width="500" height="300" style="border: 1px solid #fff123"></canvas>
+<button id="saveImageBtn">Save Image</button>  
+        <button id="downloadImageBtn">Download Image</button>  
+
+</div>
+
+<script>
+        window.onload = function() {  
+            draw();  
+            var saveButton = document.getElementById("saveImageBtn");  
+            bindButtonEvent(saveButton, "click", saveImageInfo);  
+            var dlButton = document.getElementById("downloadImageBtn");  
+            bindButtonEvent(dlButton, "click", saveAsLocalImage);  
+        };  
+        function bindButtonEvent(element, type, handler){  
+            if(element.addEventListener) {  
+                element.addEventListener(type, handler, false);  
+            } else {  
+                element.attachEvent('on'+type, handler);  
+             }  
+        }  
+        function saveImageInfo (){  
+                var mycanvas = document.getElementById("thecanvas");  
+                var image    = mycanvas.toDataURL("image/png");  
+                var w=window.open('about:blank','image from canvas');  
+                w.document.write("<img src='"+image+"' alt='from canvas'/>");  
+            }  
+
+        function saveAsLocalImage () {  
+            var myCanvas = document.getElementById("thecanvas");  
+            // here is the most important part because if you dont replace you will get a DOM 18 exception.  
+            // var image = myCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream;Content-Disposition: attachment;filename=foobar.png");  
+			var image = myCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream"); 
+			// console.log(image) 
+            window.location.href=image; // it will save locally  
+        }  
+
+        function draw(){ 
+            var img = new Image();          
+            img.src = "https://pic2.zhimg.com/v2-3f3533b2e479e2a17cc96654024a8b41_r.jpg";
+            //如果没有这一段代码保存图片你会想死
+            img.setAttribute("crossOrigin",'Anonymous');
+            var canvas = document.getElementById("thecanvas");  
+            var ctx = canvas.getContext("2d");          
+            // 绘制水印一下内容可自行更改，建议使用一种颜色
+            img.onload = function(){
+                ctx.drawImage(img,0,0);
+                ctx.font="20px microsoft yahei";
+                ctx.fillStyle = "red(255,255,255,0.5)";
+                ctx.fillText("my images",100,100);
+                ctx.fillText("my images",100,150);
+                ctx.fillText("my images",100,200);
+                ctx.fillText("my images",100,250);
+                }
+            }
+
+
+    </script>
+</body>
+</html>
+</html>

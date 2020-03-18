@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.SuperSlide.2.1.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+    <script src="js/bootbox.all.min.js"></script>
+    <script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="tpsbox">
+			<div class="bar"><span>修改密码</span><i class="close"></i></div>
+			<div class="ctn">
+				<input type="text" />
+				<input type="text" />
+				<a href="#" class="btn"></a>
+			</div>
+		</div>
+		<div class="tpsbox_bg"></div>
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="CkCenter-mine.html">创客中心</a>
+				</div>
+				<div class="usercenter">
+					<div class="usercenter-left">
+						<ul>
+							<li class="title">创客中心</li>
+							<li class="active">
+								<a href="CkCenter-mine.html">我的创客中心</a>
+							</li>
+							<li>
+								<a href="CkCenter-info-default.html">创客信息</a>
+							</li>
+							<li>
+								<a href="CkCenter-market.html">我的市场</a>
+							</li>
+							<li>
+								<a href="CkCenter-Addid.html">创建新ID</a>
+							</li>
+							<li>
+								<a href="CkCenter-TransferAccounts.html">转账</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="title">订单中心</li>
+							<li>
+								<a href="CkCenter-orders.html">我的订单</a>
+							</li>
+							<li>
+								<a href="CkCenter-Return.html">退货</a>
+							</li>
+						</ul>
+					</div>
+					<div class="usercenter-right">
+						<a href="CkCenter-info-default.html" class="edittext editinfo">修改个人信息</a>
+						<div class="ctn">
+							<div class="searchbox " style="padding-top: 20px;">
+								<div class="headbox">
+									<div class="head">
+										<img src="img/face2.png" id="uesrhead" />
+									</div>
+									<div class="h-r">
+										<span class="id" id="identifierId"></span>
+										<p>
+											<span class="bq">创客1级</span>
+											<a href="CkCenter-Apply-jx.html" class="sj" style="margin-left: 0;">申请加盟服务店</a>
+
+										</p>
+
+									</div>
+
+								</div>
+								<hr />
+
+								<div class="clearfix"></div>
+							</div>
+							<div class="jf">
+								<ul>
+									<li>
+										<div><span class="f16" style="margin-right: 10px; ">积分余额</span>
+											<a href="#" class="edittext" style="float: none;font-size: 12px;">积分规则</a>
+										</div>
+										<div><span class="bgtext" id="bonus">0</span></div>
+										<div>冻结：<span id="frozenBonus">0</span> </div>
+
+										<div>
+											<!--<a href="#" class="bottombtn bottombtn2">充值</a>
+											<a href="#" class="bottombtn">提现</a>-->
+											<button type="button" class="bottombtn bottombtn2" data-toggle="modal" data-target="#myModal">充值</button>
+                                        <!-- 模态框 -->
+                                        <div class="modal fade" id="myModal">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                    <!-- 模态框头部 -->
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title">充值积分 <span> (1积分=1元)</span></h4>
+                                                        <button type="button" class="close" data-dismiss="modal">&times</button>
+                                                    </div>
+
+                                                    <!-- 模态框主体 -->
+                                                    <div class="modal-body">
+                                                        <span>充值金额</span>
+                                                        <input onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" maxlength="5" type="text" placeholder="请输入充值的金额" class="amountOfMoney">
+                                                        <div>
+                                                            <button id="wxpay"></button>
+                                                            <button id="alipay"></button>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- 模态框底部 -->
+                                                    <!-- <div class="modal-footer">
+													<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+													</div> -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="bottombtn bottombtn2" data-toggle="modal" data-target="#myModal">提现</button>
+										</div>
+									</li>
+									<li>
+										<div><span class="f16" style="margin-right: 10px; ">兑换积余额</span>
+											<a href="#" class="edittext" style="float: none;font-size: 12px;">兑换积分明细</a>
+										</div>
+										<div><span class="bgtext" id="coupon">0</span></div>
+										<div>冻结：<span accesskey="frozen__coupon"> 0</span> </div>
+
+										<!--<div>
+											<a href="#" class="bottombtn">兑换商品</a>
+
+										</div>-->
+									</li>
+								</ul>
+							</div>
+							<hr />
+							<h4 class="ggtitle">公告</h4>
+							<div class="gglist">
+								<ul>
+									<!--<li><a href="">. 新系统正式上线</a></li>
+									<li><a href="">. 会员消费满380可升级为创客</a></li>
+									<li><a href="">. 北京经销商申请开放</a></li>
+									<li><a href="">. 新系统正式上线</a></li>
+									<li><a href="">. 会员消费满380可升级为创客</a></li>
+									<li><a href="">. 北京经销商申请开放</a></li>-->
+								</ul>
+								 
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			(function($) {
+
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.getuserinfo();
+						this.getnotice();
+					},
+					getnotice: function() {
+						//用户信息						
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/admin/notice/list",
+								async: true,
+								data: {
+									type: 0,
+									state:0,
+									userType:2									
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										var noticelist=''
+										for(var i=0;i<data.data.length;i++)
+										{
+											noticelist+="<li ><a target=\"_blank\" href=\"notice_content.html?id="+data.data[i].id+"\">. "+data.data[i].title+"</a></li>" 
+										}
+										$(".gglist ul").html(noticelist)
+									}
+								},
+								error: function() {
+
+								}
+							});
+
+					
+
+					},
+					getuserinfo: function() {
+						//用户信息
+						if(localStorage.getItem("token")) {
+
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									if(data.code == 0) {
+										$("#identifierId").html(data.data.identifierId)
+										if(data.data.headPortrait) {
+											$("#uesrhead").attr("src", data.data.headPortrait)
+										}
+										$("#bonus").html(data.data.bonus)
+										$("#frozenBonus").html(data.data.frozenBonus)
+										$("#coupon").html(data.data.coupon)
+										$("#frozen__coupon").html(data.data.frozen__coupon)
+									}
+									if(data.code==1){
+										window.location.href='login.html'
+									}
+
+									
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="css/loadding.css" />
+	<title></title>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.SuperSlide.2.1.js"></script>
+	<script src="js/distpicker.data.js"></script>
+	<script src="js/distpicker.js"></script>
+	<script src="js/config.js"></script>
+	<script src="js/public.js"></script>
+</head>
+
+<body>
+	<div class="main">
+		<!--<div class="header">
+				<div class="container">
+					<div class="header_left">
+						<a href="index.html" class="logo pull-left"><img src="img/logo.png" /></a>
+						<span class="pull-left slogan">您好，欢迎来到商城！</span>
+					</div>
+					<ul class="pull-right hearder-right">
+						<li class="pull-right" id="cart">
+							<a href="cart.html" class="gwc"><span>购物车( 0 )</span></a>
+						</li>
+						<li class="pull-right" id="login">
+							<a href="login.html" class="pull-right ">登录</a>
+						</li>
+						<li class="pull-right userid" id="usercenter">
+							<span id="userid">register</span>
+							<div class="child ">
+								<a href="UserCenter-info.html" id="usercenterlink">个人中心</a>
+								<a href="javascript:void(0)" id="exit">退出</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>-->
+		<script src="js/header.js"></script>
+		<div class="container">
+			<div class="left pull-left">
+				<div class="banner slideBox" id="slideBox">
+					<div class="hd">
+						<ul>
+							<!-- <li>1</li>-->
+						</ul>
+					</div>
+					<div class="bd">
+						<ul id="bannerList">
+						</ul>
+					</div>
+
+				</div>
+				<div class="searchbox searchbox2 searchbox3">
+					<div class="searchtab_ctn">
+						<ul>
+							<li>
+								<span>搜索商品</span>
+								<input class="langinput" id="keywords" type="text" placeholder="输入商品名称" />
+								<span class="searchbtn" id="searchproduct">查询</span></li>
+
+						</ul>
+					</div>
+				</div>
+
+				<div class="tabbar">
+					<ul id="shopProductCategorys">
+						<!--<li class="active">白酒</li>
+							<li>啤酒</li>
+							<li>保健酒</li>
+							<li>饮料</li>
+							<li>粮油</li>
+							<li>茶叶</li>
+							<li>其他</li>-->
+
+					</ul>
+				</div>
+				<div class="prdlist">
+					<div class="loadingbox">
+						<div class="loading">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+					<!--<div class='loading-anim'>
+							<div class='border out'></div>
+							<div class='border in'></div>
+							<div class='border mid'></div>
+							<div class='circle'>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+								<span class='dot'></span>
+							</div>
+						</div>-->
+					<ul>
+						<!--<li>
+								<a href="product.html"></a>
+								<div class="prdpic">
+									<img src="img/j1.jpg" />
+								</div>
+								<h2 class="prdtitle">承德老酒如意洲 42度陈酿白酒 4X500ml整箱</h2>
+								<p class="prdmoney">260 元</p>
+							</li>-->
+
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+				<div class="page">
+					<ul>
+						<!--<li>上一页</li>
+							<li>1</li>
+							<li class="active">2</li>
+							<li>3</li>
+							<li>4</li>
+							<li>5</li>
+							<li>下一页</li>-->
+					</ul>
+				</div>
+			</div>
+			<div class="right pull-right">
+				<a href="login.html" class="index_btn">已是会员，立即登陆</a>
+				<a href="register.html" class="index_btn2">免费注册会员，享优惠</a>
+				<div class="noticebox">
+					<span class="rightTitle">操作指南</span>
+
+					<ul id="docList" style="min-height: 200px;" c>
+					</ul>
+				</div>
+				<div class="noticebox">
+					<span class="rightTitle">关于如意洲酒业</span>
+					<div class="video noplayicon">
+						<img src="img/index_about.png" />
+					</div>
+                    <p class="video_text">
+                        承德市如意酒业有限公司，始建于1985年，注册商标为“如意洲”，品牌起源于避暑山庄的七十二景之一，具有厚重的民族文化底蕴。公司位于承德市双滦区双塔山镇承德国际商贸物流园区内，主要产品为白酒、红酒、啤酒、饮料、茶产品、农副产品等，是集科研、生产、销售为一体的集团化公司。
+                    </p>
+					<!--<p class="video_link">更多详情请访问
+						<a href="#">官网网站 ></a>
+					</p>-->
+				</div>
+				<div class="noticebox">
+					<span class="rightTitle">联系我们</span>
+
+					<p class=" text-center shzc">售后服务热线</p>
+                    <strong class="text-center">18603142534</strong>
+
+                    <P class="text-center ">周一至周日 8:00-18:00<br /><br />地址: 河北省承德市双滦区</P>
+				</div>
+			</div>
+		</div>
+		<div class="clearfix"></div>
+		<div class="footer">
+			<div class="container">
+				<ul>
+					<li><span>如意洲官网</span></li>
+					<li><span>7天无理由退货</span></li>
+					<li><span>15天免费换货</span></li>
+					<li><span>购物享更多优惠</span></li>
+					<li><span>全国服务店网点</span></li>
+				</ul>
+				<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		(function ($) {
+			var prdkey, productCategoryId
+
+			//资源编辑页管理对象
+			var FormObj = {
+				Init: function () {
+					this.ADDEvent();
+					this.getDocs();
+					this.getProductCategory();
+					publc_Obj.islogin();
+					publc_Obj.AddEvent();
+					this.getbanner();
+
+				},
+
+				// 操作指南
+				getDocs: function () {
+					$.ajax({
+						type: "post",
+						url: Work_Config.InterfaceDomain + "/admin/notice/list",
+						async: true,
+						data: {
+							type: 1,
+							state: 0
+						},
+						success (resp) {
+							var arr = [];
+							var html = '';
+
+							if (resp.code === 0) {
+								for (var i = 0; i < resp.data.length; i++) {
+									arr.push(
+										'<li>\
+											<a target="_blank" href="Doc-Guide.html?id=' + resp.data[i].id + '&type=1">·' + resp.data[i].title + ' </a>\
+										</li>'
+									)
+								}
+								
+								$('#docList').html(arr.join(''))
+							}
+						}
+					});
+				},
+
+				//banner
+				getbanner: function () {
+
+					$.ajax({
+						type: "post",
+						url: Work_Config.InterfaceDomain + "/banner/getBannerList",
+						async: true,
+						data: {
+							token: localStorage.getItem("token"),
+							state: 0
+						},
+						success: function (resp) {
+							var list = resp.data || [];
+							var controlHtml = '';
+							var bannerHtml = '';
+
+							// 错误处理
+							if (resp.code !== 0) { 
+								return;
+							}
+
+							for (var i = 0; i < list.length; i++) {
+								controlHtml += '<li>' + (i + 1) + '</li>'
+								bannerHtml += '<li>\
+									<a href="' + list[i].url + '" target="_blank"><img src="' + list[i].imageUrl + '" /></a>\
+								</li>';
+							}
+
+							$('#slideBox .hd ul').empty().html(controlHtml);
+							$('#bannerList').empty().html(bannerHtml);
+						
+							jQuery(".slideBox").slide({
+									mainCell: ".bd ul",
+									autoPlay: true
+							});
+
+						},
+						error: function () {
+
+						}
+					});
+				},
+				//产品分类
+				getProductCategory: function () {
+
+					$.ajax({
+						type: "post",
+						url: Work_Config.InterfaceDomain + "/product/getProductCategory",
+						async: true,
+						data: {
+							token: localStorage.getItem("token")
+
+						},
+						success: function (data) {
+							if (data.code == 0) {
+								for (var i = 0; i < data.data.length; i++) {
+									var html = ''
+									html += '<li id=\'' + data.data[i].id + '\'>' + data.data[i].name + '</li>'
+									$("#shopProductCategorys").append(html)
+								}
+								$("#shopProductCategorys li:first-child").trigger("click")
+							}
+							if (data.code == 1) {
+								window.location.href = 'login.html'
+							} else {
+								$(".tpsbox .message").html(data.message);
+							}
+						},
+						error: function () {
+
+						}
+					});
+				},
+				ADDEvent: function () {
+					//获取产品列表
+					var pageNo = 1;
+					var id = 1;
+
+					//根绝店铺id获取店铺详细资料
+					$("body .shoplist").on('click', 'span', function () {
+						$(this).addClass("active").siblings().removeClass("active")
+						var userid = $(this).attr("userid")
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/shop/getShopStoreDetailByUserId",
+							async: true,
+							data: {
+								id: userid
+							},
+							success: function (data) {
+								if (data.code == 0) {
+									$(".shopInfo").html("<span>店铺名称：" + data.data.shopName + "</span>" +
+										"<span>店铺ID:" + data.data.identifierId + "</span>" +
+										"<span>联系电话：" + data.data.principalsTel + "</span><br />" +
+										"<span>联系地址：" + data.data.addressDetails + "</span>");
+
+								}
+								if (data.code == 1) {
+									window.location.href = 'login.html'
+								} else {
+									//										$(".tpsbox .message").html(data.message);
+								}
+							},
+							error: function () { }
+
+						})
+					});
+					//按id搜索
+					$("#getShopStoreByIdentifierId").click(function () {
+						$(".shoplist").html("");
+						$(".shopInfo").html("");
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/shop/getShopStoreByIdentifierId",
+							async: true,
+							data: {
+								identifierId: $("#identifierId").val()
+
+							},
+							success: function (data) {
+								if (data.code == 0) {
+									for (var i = 0; i < data.data.length; i++) {
+										var html = ''
+										html += '<span userId=\'' + data.data[i].userId + '\'>' + data.data[i].shopName + '</span>'
+										$(".shoplist").append(html)
+									}
+
+								}
+								if (data.code == 1) {
+									window.location.href = 'login.html'
+								} else {
+									//										$(".tpsbox .message").html(data.message);
+								}
+							},
+							error: function () { }
+
+						})
+					});
+					$("body #shopProductCategorys").on('click', 'li', function () {
+						prdkey = $(this).text()
+
+						$(this).addClass("active").siblings().removeClass("active")
+						pageNo = 1;
+						id = $(this).attr("id");
+						console.log(id)
+						publc_Obj.prdlist(pageNo, id, prdkey)
+
+					})
+					$("body .page").on('click', 'li', function () {
+						pageNo = $(this).text();
+
+						publc_Obj.prdlist(pageNo, id)
+
+					})
+					$(".searchtab span").click(function () {
+						var i = $(".searchtab span").index(this)
+						$(this).addClass("active").siblings().removeClass("active")
+						$(".searchtab_ctn  li:eq(" + i + ")").show().siblings().hide()
+					})
+					$("#searchproduct").click(function () {
+						if (!$("#keywords").val()) {
+							$("#keywords").addClass("redborder")
+							return
+						}
+						let keywords = $("#keywords").val()
+						let newkeywords = encodeURI(encodeURI(keywords));
+						window.location.href = 'productlist.html?keywords=' + newkeywords + ''
+					})
+				}
+
+			};
+			//初始化
+			FormObj.Init();
+		}(jQuery));
+
+		$("#distpicker2").distpicker({
+			province: "---- 所在省 ----",
+			city: "---- 所在市 ----",
+			district: "---- 所在区 ----"
+		});
+
+	</script>
+
+</body>
+
+</html>

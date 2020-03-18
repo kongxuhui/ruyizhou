@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="CkCenter-mine.html">创客中心</a>
+					<a href="">创建新ID</a>
+				</div>
+				<div class="usercenter">
+					<div class="usercenter-left">
+						<ul>
+							<li class="title">创客中心</li>
+							<li>
+								<a href="CkCenter-mine.html">我的创客中心</a>
+							</li>
+							<li>
+								<a href="CkCenter-info-default.html">创客信息</a>
+							</li>
+							<li>
+								<a href="CkCenter-market.html">我的市场</a>
+							</li>
+							<li class="active" id="addCK">
+								<a href="CkCenter-Addid.html">创建新ID</a>
+							</li>
+							<li>
+								<a href="CkCenter-TransferAccounts.html">转账</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="title">订单中心</li>
+							<li>
+								<a href="CkCenter-orders.html">我的订单</a>
+							</li>
+							<li>
+								<a href="CkCenter-Return.html">退货</a>
+							</li>
+						</ul>
+					</div>
+					<div class="usercenter-right">
+						<div class="ctn">
+							<h1>创建新ID</h1>
+							<div class="mbx">
+
+							</div>
+							<div class="searchbox ">
+								<form id="form1">
+
+									<ul>
+										<li>
+											<div class="lable">
+												<span>新ID：</span>
+											</div>
+											<h2 class="brown" id="newid"></h2>
+											<P style="padding-bottom: 30px;">注：一次性消费380起的 无优惠购物，即可激活该ID号；</P>
+										</li>
+										<li>
+											<div class="lable">
+												<span>设置新ID密码：</span>
+											</div>
+											<input name="realName" id="passWord" class="biginput biginput" placeholder="请输入密码" />
+										</li>
+										<li>
+											<div class="lable">
+												<span>再次输入密码：</span>
+											</div>
+											<input name="idCardNo" id="passWord2" class="biginput biginput" placeholder="请再次输入密码" />
+
+										</li>
+										<li>
+											<div class="lable">
+												<span>推荐人ID：</span>
+											</div>
+											<input name="realName" id="shareIdentifierId" class="biginput biginput" placeholder="请输入收藏人ID,输入以后不可更改" />
+										</li>
+										<!--<li>
+											<div class="lable">
+												<span>收藏人ID：</span>
+											</div>
+											<input name="idCardNo" id="idCardNo" class="biginput biginput" placeholder="请输入收藏人ID,输入以后不可更改" />
+
+										</li>
+										<li>
+											<div class="lable">
+												<span>收藏到：</span>
+											</div>
+											<select class="biginput biginput">
+												<option>1</option>
+											</select>
+
+										</li>-->
+										<li>
+											<div class="lable">
+												<span>&nbsp;</span>
+											</div>
+											<input name="token" value="" id="token" style="display: none;" />
+											<input name="headPortrait" id="headPortrait" value="http://t2.hddhhn.com/uploads/tu/MN/532/twmn.jpg" style="display: none;" />
+											<a href="javascript:void(0)" style="padding: 0;" class="btn" id="AddNewck">激活ID</a>
+										</li>
+									</ul>
+
+									<div class="clearfix"></div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+		<script>
+			(function($) {
+
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.AddEvent();
+						publc_Obj.getCKuser();
+					},
+					AddEvent: function() {
+						$("#AddNewck").click(function() {
+							var ckid = $(this).attr("name")
+
+							if(ckid.charAt(ckid.length - 1) > 5) {
+								publc_Obj.message("您已经创建了超过5个ID，不能再添加更多ID了")
+								return
+							}
+							var newIdentifierId = "CK" + ckid
+							if(!$("#passWord").val()) {
+								$("#passWord").addClass("redborder")
+								bootbox.alert("请输入密码")
+								return
+							}
+							if(!$("#passWord2").val()) {
+								$("#passWord").addClass("redborder")
+								bootbox.alert("请输入密码")
+								return
+							}
+							if($("#passWord").val() != $("#passWord2").val()) {
+								$("#passWord,#passWord2").addClass("redborder")
+								bootbox.alert("两次密码输入不一直，请重新输入")
+								return
+							}
+							if($("#passWord").val() != $("#passWord2").val()) {
+								$("#passWord,#passWord2").addClass("redborder")
+								bootbox.alert("两次密码输入不一直，请重新输入")
+								return
+							}
+							if(!$("#shareIdentifierId").val()) {
+								$("#shareIdentifierId").addClass("redborder")
+								bootbox.alert("请输入推荐人ID")
+								return
+							}
+
+							bootbox.confirm({
+								message: "想要创建新ID，必须一次性消费380起的 无优惠购物，现在就去购物吗？",
+								buttons: {
+									confirm: {
+										label: '去购物',
+										className: 'btn-success'
+									},
+									cancel: {
+										label: '不去了',
+										className: 'btn-danger'
+									}
+								},
+								callback: function(result) {
+									if(result) {
+										localStorage.setItem("needAddid", "1")
+										localStorage.setItem("shareIdentifierId", $("#shareIdentifierId").val())
+										localStorage.setItem("passWord", $("#passWord").val())
+										localStorage.setItem("newIdentifierId",newIdentifierId)
+										window.location.href = 'index.html'
+
+									} else {
+										publc_Obj.message("创建ID失败")
+									}
+
+								}
+							});
+
+							//							$.ajax({
+							//								type: "post",
+							//								url: Work_Config.InterfaceDomain + "/user/addCKuser",
+							//								async: true,
+							//								data: {
+							//									token: localStorage.getItem("token"),
+							//									newIdentifierId: newIdentifierId,
+							//									passWord: $("#passWord").val(),
+							//									shareIdentifierId: $("#shareIdentifierId").val()
+							//								},
+							//								success: function(data) {
+							//									publc_Obj.message(data.message)
+							//
+							//								},
+							//								error: function() {
+							//
+							//								}
+							//							});
+						})
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+
+			$("#distpicker2").distpicker({
+				province: "---- 所在省 ----",
+				city: "---- 所在市 ----",
+				district: "---- 所在区 ----"
+			});
+		</script>
+	</body>
+
+</html>

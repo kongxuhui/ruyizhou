@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+
+	</head>
+
+	<body>
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="UserCenter-mine.html">个人中心</a>
+					<a href="">我的退货</a>					
+				</div>
+				<div class="usercenter">
+					<div class="usercenter-left">
+						<ul>
+							<li class="title">店铺中心</li>
+							<li>
+								<a href="ShopCenter-mine.html">我的店铺</a>
+							</li>
+							<li >
+								<a href="ShopCenter-info-default.html">店铺信息</a>
+							</li>
+							<li>
+								<a href="ShopCenter-kucun.html">店铺库存</a>
+							</li>
+							<li >
+								<a href="ShopCenter-jinhuo.html">进货</a>
+							</li>
+							<li>
+								<a href="ShopCenter-TransferAccounts.html">转账</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="title">订单中心</li>
+							<li>
+								<a href="ShopCenter-jhorders.html">进货单</a>
+							</li>
+							<li>
+								<a href="ShopCenter-qhorders.html">取货订单管理</a>
+							</li>
+							<li >
+								<a href="ShopCenter-thorders.html">退货订单管理</a>
+							</li>							
+							<li  class="active">
+								<a href="ShopCenter-myReturn.html">退货</a>
+							</li>
+						</ul>
+					</div>
+					<div class="usercenter-right">
+						<div class="ctn">
+							<h1>我的退货</h1>
+							<div class="mbx">
+								<div class="pull-left">
+								<a href="#" class="active">已处理</a>
+								<a href="#">未处理</a>
+</div>
+								<div class="rightserch">
+									<input type="" name="" id="" value="" placeholder="输入兑换单号，商品名称" />
+									<span class="searchbtn" ></span>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="orderlist">
+								<ul>
+									<li>
+										<div class="topbox">
+											<div class="status">等待退还商品   退货</div>
+											<div class="pull-left">
+												<div class="toptxt">
+													<span>2019年4月10日 15:42</span>
+													<span>赣州中心服务店</span>
+													<span>兑换单号：HY201904101</span>
+												</div>
+												<div class="toptxt">
+													<span>无优惠</span>
+													<span>不需要退货服务</span>
+												</div>
+												
+											</div>
+											<div class="pull-right">
+												<span>实付积分：</span><span class="ordermondy">1140</span>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+
+										<hr>
+										<div class="myprdlist">
+											<ul>
+												<li><img src="img/01.png" />
+													<h2>42度陈酿白酒  4×500ml整箱</h2>
+													<p>380 积分×1</p>
+												</li>
+												<li><img src="img/01.png" />
+													<h2>42度陈酿白酒  4×500ml整箱</h2>
+													<p>380 积分×1</p>
+												</li>
+												 
+											</ul>
+										</div>
+										<div class="btnbox">
+											<a href="" class="rightbtn">商品已退</a>
+											<a href="" class="rightbtn2">订单详情</a>
+										</div>
+										<div class="clearfix"></div>
+
+									</li>
+									
+								</ul>
+							</div>
+							
+						</div>
+
+					</div>
+
+					<div class="clearfix">
+
+					</div>
+
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			(function($) {
+
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.AddEvent();
+						this.getuserinfo();
+					},
+					AddEvent: function() {
+
+					},
+					getuserinfo: function() {
+						//用户信息
+						if(localStorage.getItem("token")) {
+
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									if(data.code == 0) {										
+										 
+										$("#bankCardNumbertxt").html(data.data.bankCardNumber);
+										$("#emailtxt").html(data.data.email);
+										$("#mobilePhonetxt").html(data.data.mobilePhone);
+										if(!data.data.bank) {											
+											$("#yhkpic").attr("src", "img/ykard2.png");
+											$("#bankAccountName").html("暂未添加银行卡");
+											$("#yhkpic").attr("src", "img/ykard2.png");
+										} else {
+											var bankname=""
+											$("#bank option").each(function(){
+												if($(this).attr("value")==data.data.bank)
+												{
+													bankname=$(this).text()
+												
+												}
+											})
+											$("#bankAccountNametxt").html(bankname);
+											$("#bankAccountName").html(bankAccountName);
+											$("#bankCardNumber").html(bankCardNumber);
+
+										}
+										//										
+
+									}
+
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+			$("#distpicker2").distpicker({
+				province: "---- 所在省 ----",
+				city: "---- 所在市 ----",
+				district: "---- 所在区 ----"
+			});
+		</script>
+	</body>
+
+</html>

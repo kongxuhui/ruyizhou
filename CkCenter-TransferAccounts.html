@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+
+	</head>
+
+	<body>
+		<div class="main">
+			<script src="js/header.js"></script>
+
+			<div class="container">
+				<div class="Bread">
+					<a href="index.html">首页</a>
+					<a href="CkCenter-mine.html">创客中心</a>
+					<a href="">我的退货</a>					
+				</div>
+				<div class="usercenter">
+					<div class="usercenter-left">
+						<ul>
+							<li class="title">创客中心</li>
+							<li>
+								<a href="CkCenter-mine.html">我的创客中心</a>
+							</li>
+							<li>
+								<a href="CkCenter-info-default.html">创客信息</a>
+							</li>
+							<li>
+								<a href="CkCenter-market.html">我的市场</a>
+							</li>
+							<li>
+								<a href="CkCenter-Addid.html">创建新ID</a>
+							</li>
+							<li class="active">
+								<a href="CkCenter-TransferAccounts.html">转账</a>
+							</li>
+						</ul>
+						<ul>
+							<li class="title">订单中心</li>
+							<li>
+								<a href="CkCenter-orders.html">我的订单</a>
+							</li>
+							<li>
+								<a href="CkCenter-Return.html">退货</a>
+							</li>
+						</ul>
+					</div>
+					<div class="usercenter-right">
+						<div class="ctn">
+							<h1>转账</h1>
+							<div class="mbx">
+								<div class="pull-left">
+								<a href="CkCenter-TransferAccounts.html" class="active">积分转账</a>
+								<a href="CkCenter-TransferAccounts-dhj.html">兑货券积分转账</a>
+</div>
+								
+								<div class="clearfix"></div>
+							</div>
+							<div class="searchbox ">
+								<div class="brown" style="padding-bottom: 40px;">注意：请认证核对对方ID号，请勿搞错，转账完成，将无法返回金额。</div>
+								<ul>
+									<li>
+										<div class="lable">
+											<span>转入ID：</span>
+										</div>
+										<input class="biginput biginput" placeholder="请填写对方ID" id="identiflerId" />
+									</li>
+									<li>
+										<div class="lable">
+											<span>转账金额：</span>
+										</div>
+										<input class="biginput biginput" id="money" placeholder="请输入积分金额" />
+
+									</li>
+									
+									
+									
+									<li> <div class="lable">
+											<span>&nbsp;</span>
+										</div>
+										<a href="javascrip:void(0)" class="btn sendmoney" style="padding: 0;">确认</a></li>
+								</ul>
+
+								<div class="clearfix"></div>
+							</div>
+							
+						</div>
+
+					</div>
+
+					<div class="clearfix">
+
+					</div>
+
+				</div>
+
+				<!--<div class="clearfix"></div>-->
+			</div>
+
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			(function($) {
+							//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {						
+						this.ADDEvent();
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+//						this.getuserinfo();
+						
+
+					},
+					
+					ADDEvent: function() {
+						
+
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+		</script>
+	</body>
+
+</html>

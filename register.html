@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+
+	</head>
+
+	<body>
+		<div class="loginbox" id="phonebox">
+			<div class="logo">
+				<a href="index.html"><img src="img/logo.png" /></a>
+			</div>
+			<h1 class="title">免费注册会员</h1>
+			<div class="forembox">
+				<input id="mobilePhone" type="text" placeholder="请输入11位手机号码" />
+				<input type="text" placeholder="请输入验证码" class="yzm" />
+				<!--<img src="img/banner.jpg" class="yzmpic" />-->
+				<input class="getyzm" type="button" id="getCode" value="获取验证码" /> 
+				<div class="clearfix"></div>
+				<!-- 手机号输入错误提示框 -->
+				<div class="nerror">
+					<!-- <span></span> -->
+					<!-- <span></span> -->
+				</div>
+				<span class="btn" id="checkPhoneNmuber">免费注册</span>
+				<p>
+					<a href="login.html" class="pull-left sin">已是会员，立即登录</a>
+				</p>
+				<p id="cw1" style="color: #FF0000; text-align: center;"></p>
+			</div>
+			<div class="logincopyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</div>
+		</div>
+
+		<div class="loginbox" id="setpasswordbox" style="display: none;">
+			<h1 class="title">设置密码</h1>
+			<div class="forembox">
+				<div class="inputgroup">
+					<span>登陆密码：</span>
+					<input type="password" placeholder="设置登陆密码" id="loginPassword" />
+					<input type="password" placeholder="请再次输入登陆密码" id="loginPassword2" />
+					<div class="loginPasswordError">两次输入的密码不一致</div>
+				</div>
+				<div class="inputgroup">
+					<span>查询密码：</span>
+					<input type="password" placeholder="设置查询密码" id="queryPassword" />
+					<input type="password" placeholder="请再次输入查询密码" id="queryPassword2" />
+					<div class="queryPasswordError">两次输入的密码不一致</div>
+				</div>
+				<div class="inputgroup">
+					<span>交易密码：</span>
+					<input type="password" placeholder="设置交易密码" id="transactionPassword" />
+					<input type="password" placeholder="请再次输入交易密码" id="transactionPassword2" />
+					<div class="transactionPasswordError">两次输入的密码不一致</div>
+				</div>
+
+				<span class="btn" id="setPasswore">确认</span>
+	<p id="cw2" style="color: #FF0000; text-align: center;"></p>
+			</div>
+			<div class="logincopyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</div>
+		</div>
+	</body>
+
+</html>
+<script>
+	(function($) {
+		//资源编辑页管理对象
+		var FormObj = {
+			Init: function() {
+				publc_Obj.islogin();
+				this.AddEvent()
+			},
+		//事件注册
+		AddEvent: function() {
+			
+			//验证手机号和验证码进入设置密码页面
+			$("#checkPhoneNmuber").click(function() {
+				if(!$("#mobilePhone").val()) {
+					$("#mobilePhone").addClass("redborder")
+					$("#mobilePhone").attr("placeholder", "请输入手机号")
+					return
+				}
+				$.ajax({
+					type: "post",
+					url: Work_Config.InterfaceDomain + "/user/checkPhone",
+					async: true,
+					data: {
+						mobilePhone: $("#mobilePhone").val(),
+						checkCode: $('.yzm').val(),
+					},
+					success: function(data) {
+						if(data.code == 0) {
+							$("#setpasswordbox").show();
+							$("#phonebox").hide();
+						}
+						else{
+							$("#cw1").html(data.message)
+						}
+					},
+					error: function() {
+
+					}
+				});
+			})
+			//设置密码跳转登录
+			$("#setPasswore").click(function() {
+				var _isInvalid = false;
+					$("#setpasswordbox input").each(function() {
+						if(!$(this).val()) {
+							$(this).addClass("redborder")
+							_isInvalid = true;
+							return false;
+						}
+					});
+					if(_isInvalid) {
+						return false;
+					}
+					
+
+					var loginPassword = $("#loginPassword").val();
+					var loginPassword2 = $("#loginPassword2").val();
+					var queryPassword = $("#queryPassword").val();
+					var queryPassword2 = $("#queryPassword2").val();
+					var transactionPassword = $("#transactionPassword").val();
+					var transactionPassword2 = $("#transactionPassword2").val();
+					if(!loginPassword || !loginPassword2 || loginPassword != loginPassword2) {
+						$("#loginPassword").addClass("redborder")
+						$('.loginPasswordError').css('display','block');
+						return
+					}else{
+						$("#loginPassword").removeClass("redborder")
+						$('.loginPasswordError').css('display','none');
+					}
+					if(!queryPassword||!queryPassword2||queryPassword!= queryPassword2) {
+						$("#queryPassword2").addClass("redborder")
+						$('.queryPasswordError').css('display','block');
+						return
+					}else{
+						$("#queryPassword2").removeClass("redborder")
+						$('.queryPasswordError').css('display','none');
+					}
+					if(!transactionPassword||!transactionPassword2||transactionPassword != transactionPassword2) {
+						$("#transactionPassword2").addClass("redborder")
+						$('.transactionPasswordError').css('display','block');
+						return
+					}else{
+						$("#transactionPassword2").removeClass("redborder")
+						$('.transactionPasswordError').css('display','none');
+					}
+
+					$.ajax({
+						type: "post",
+						url: Work_Config.InterfaceDomain + "/user/userRegist",
+						async: true,
+						data: {
+							mobilePhone: $("#mobilePhone").val(),
+							loginPassword: $("#loginPassword").val(),
+							loginPassword2: $("#loginPassword2").val(),
+							queryPassword: $("#queryPassword").val(),
+							queryPassword2: $("#queryPassword2").val(),
+							transactionPassword: $("#transactionPassword").val(),
+							transactionPassword2: $("#transactionPassword2").val(),
+							// checkCode: 
+						},
+						success: function(data) {
+							if(data.code == 0) {
+								bootbox.alert("注册成功,请登陆！")
+								setTimeout("javascript:location.href='login.html'", 2000);
+							}
+						},
+						error: function() {
+
+						}
+					});
+				
+			})
+		}
+	};
+	//初始化
+	FormObj.Init();
+
+
+	// 验证码倒计时
+	var countdown=60;
+	function settime(obj) { //发送验证码倒计时
+		if (countdown == 0) { 
+			obj.attr('disabled',false); 
+			//obj.removeattr("disabled"); 
+			obj.val("重新获取");
+			countdown = 60; 
+			return;
+		} else { 
+			obj.attr('disabled',true);
+			obj.val("(" + countdown + ")秒重发");
+			countdown--; 
+		} 
+		setTimeout(function() {settime(obj) },1000) 
+	}
+	//检验手机有效性
+	function checkPhonenumber(){ 
+		var phone = $("#mobilePhone").val();
+		if(phone != '' && !(/^1[3456789]\d{9}$/.test(phone))){
+			$('.nerror').html('<span>手机号格式有误</span>') 
+			return false; 
+		}else if(phone == ''){
+			$('.nerror').html('<span>请输入手机号</span>')
+			return false;
+		}else{
+			return true
+		}
+	}
+	//获取验证码
+	$('#getCode').click(() => {
+		if(checkPhonenumber()){
+			$('.nerror').html('')
+			settime($('#getCode'));
+			$.ajax({
+				type: "post",
+				url: Work_Config.InterfaceDomain + "/user/getCheckCode",
+				async: true,
+				data: {
+					mobilePhone: $("#mobilePhone").val(),
+				},
+				success: function(data) {
+					if(data.code == 0){
+					}
+				},
+				error: function() {
+				}
+			});
+		}
+		
+	})
+	}(jQuery));
+</script>

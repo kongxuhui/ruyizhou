@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<!--<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />-->
+
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="js/distpicker.data.js"></script>
+		<script src="js/distpicker.js"></script>
+		<script src="js/config.js"></script>
+		<script src="js/public.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/bootbox.all.min.js"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<script src="js/header.js"></script>
+			<div class="container" id="kong" style="display: none;">
+				<div class="empitybox">
+					<img src="img/cart.png" class="cart" />
+					<div class="ctn">
+						<h3 class="bigtitle">您的购物车还是空的</h3>
+						<p>登录后将显示您之前加入的商品。</p>
+						<a href="login.html" class="fullbtn" id="ljdl">立即登录</a>
+						<a href="index.html" class="linebtn">马上购物</a>
+					</div>
+				</div>
+			</div>
+			<div class="container" id="gwc">
+				<div class="cartbox">
+					<table id="box">
+						<thead>
+							<tr>
+								<th>
+									<div class="label labelchecked" id="all"><input type="checkbox">全选</div>
+									<div class="label labelchecked" style="display: none;"><input type="checkbox" id="unSelect">不选</div>
+
+								</th>
+								<th class="textlef">商品名称</th>
+								<th>单价</th>
+								<th>支付方式</th>
+								<th class="text-center">数量</th>
+								<th>小计</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody id="list">
+							<!--<tr>
+								<th>
+									<div class="label"><input type="checkbox" name="checkbox" value="1"></div><img src="img/j1.jpg" /></th>
+								<th class="textlef">42度陈酿白酒 4X500ml整箱</th>
+								<th>260元</th>
+								<th><select class="modal">
+									<option value="0">积分</option>
+									<option value="1">兑换券</option>
+								</select></th>
+								<th class="text-center">
+									<div class="btnbox">
+										<a href="#" class="jian">-</a>
+										<input type="number" class="shu" />
+										<a href="#" class="jia">+</a>
+										</div</th>
+										<th><span class="brown">260积分</span></th>
+										<th><img src="img/del.png" class="delbtn" /></th>
+							</tr>-->
+
+						</tbody>
+					</table>
+					<div class="loadingbox">
+						<div class="loading">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+				</div>
+				<div class="cartbar">
+					<div class="pull-left">共<span class="brown" id="allprd">0</span>件商品，已选择<span class="brown" id="checkprd">0</span>件    <a  style="font-size: 18px;" class=" brown" href="index.html"> 继续购物</a></div>
+					<div class="pull-right brown">
+						合计：<span class="jifen" id="totaljf">0</span> 积分和<span class="jifen" id="totaldh">0</span>兑货券积分
+					</div>
+					<b class="paybtn" id="paybtn">去结算</b>
+					<div class="mybonus">账户余额<b id="bonus" class="brown">0</b>积分 和<b id="coupon" class="brown">0</b> 兑货券分</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="footer">
+				<div class="container">
+					<ul>
+						<li><span>如意洲官网</span></li>
+						<li><span>7天无理由退货</span></li>
+						<li><span>15天免费换货</span></li>
+						<li><span>购物享更多优惠</span></li>
+						<li><span>全国服务店网点</span></li>
+					</ul>
+					<p class="copyright">如意洲商城©2019 承德市如意洲商贸有限公司版权所有 京ICP备08010318号 京公网安备11000002000088号</p>
+				</div>
+			</div>
+		</div>
+		<script>
+			var totaljf = 0;
+			var totaldh = 0;
+			(function($) {
+
+				//资源编辑页管理对象
+				var FormObj = {
+					Init: function() {
+						this.getProduclist();
+						publc_Obj.islogin();
+						publc_Obj.AddEvent();
+						this.ADDEvent();
+						this.getuserinfo()
+					},
+					TotalMoney: function() {
+					
+						totaljf = 0;
+						totaldh = 0;
+						$("#allprd").html($("#list tr").length);
+						$("#checkprd").html($("#list .checkenline").length);
+
+						$(".checkenline .dhline").each(function() {
+							totaldh = parseInt(totaldh) + parseInt($(this).text());
+						})
+						$(".checkenline .Total").each(function() {
+							totaljf = parseInt(totaljf) + parseInt($(this).text());
+						})
+						totaljf = totaljf - totaldh;
+						$("#totaljf").html(totaljf);
+						$("#totaldh").html(totaldh)
+
+					},
+					updateShopCarById:function(id,productCount,payMode){
+					
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/product/updateShopCarById",
+							async: true,
+							data: {
+								token: localStorage.getItem("token"),
+								id:id,
+								productCount:productCount,
+								payMode:payMode
+
+							},
+							success: function(data) {								
+								if(data.code == 0) {
+								}
+
+							},
+							error: function() {
+
+							}
+						});
+					},
+					delproduct:function(id,isdel){
+						console.log(id)
+						bootbox.confirm({
+								message: "您确定要将此商品移除购物车吗？",
+								buttons: {
+									confirm: {
+										label: '确定 ',
+										className: 'btn-danger'
+									},
+									cancel: {
+										label: '取消',
+										className: 'btn-info'
+									}
+								},
+								callback: function(result) {
+									if(result) {
+
+										$.ajax({
+											type: "post",
+											url: Work_Config.InterfaceDomain + "/product/delShopCarById",
+											async: true,
+											data: {
+												id: id,
+												token: localStorage.getItem("token")
+											},
+
+											success: function(data) {
+												if(data.code == 0) {
+													if(isdel==1)
+													{
+													
+//														bootbox.alert("删除成功")
+													$("#" + id + "").parent().parent().remove()
+	FormObj.TotalMoney()
+													if($("#list tr").length <= 0) {
+														$("#kong").show();
+														$("#gwc").hide();
+													}
+													}
+													
+												}
+
+											},
+											error: function() {}
+
+										})
+									}
+
+								}
+							});
+					},
+					getProduclist: function() {
+						$(".loadingbox").show();
+						$.ajax({
+							type: "post",
+							url: Work_Config.InterfaceDomain + "/product/getShopCarListByUserId",
+							async: true,
+							data: {
+								token: localStorage.getItem("token"),
+
+							},
+							success: function(data) {
+								if(data.code == 1) {
+									$("#kong").show()
+									$("#gwc").hide()
+								}
+								if(data.code == 0) {
+
+									var html = "";
+									for(var i = 0; i < data.data.list.length; i++) {
+										html += "<tr class=\"checkenline\">"
+										html += "<th>"
+										html += "<div class=\"label labelchecked\"><input type=\"checkbox\" name=\"checkbox\" value=\"1\"></div><img src=\"" + data.data.list[i].albumPicslSmall + "\" /></th>"
+										html += "<th class=\"textlef\">" + data.data.list[i].productName + "</th>"
+										if(data.data.list[i].payMode==0)
+										{
+											html += "<th class=\"money\"><span >" + data.data.list[i].price + "</span>元</th>"
+										}
+										if(data.data.list[i].payMode==1)
+										{
+											html += "<th class=\"money\"><span >" + data.data.list[i].promotionPrice + "</span>元</th>"
+										}
+										if(data.data.list[i].ifPromotion == false) {
+											html += "<th ><select class=\"paymodal\">"
+											html += "<option value=\"0\"  >积分</option>"
+
+											html += "</select><span class=\"Price\">" + data.data.list[i].price + "</span><span class=\"promotionPrice\">" + data.data.list[i].promotionPrice + "</span></th>"
+										} 
+										
+										if(data.data.list[i].ifPromotion == true){
+											html += "<th ><select class=\"paymodal\">"
+											if( data.data.list[i].payMode==0)
+											{
+												html += "<option value=\"0\"  selected=\"selected\" >积分</option>";
+											html += "<option value=\"1\" >兑换券</option>"
+											}
+											if( data.data.list[i].payMode==1)
+											{
+												html += "<option value=\"0\"  >积分</option>";
+											html += "<option value=\"1\" selected=\"selected\">兑换券</option>"
+											}
+											html += "</select><span class=\"Price\">" + data.data.list[i].price + "</span><span class=\"promotionPrice\">" + data.data.list[i].promotionPrice + "</span></th>"
+										}
+
+										html += "<th class=\"text-center\">"
+										html += "<div class=\"btnbox\">"
+										html += "<span  class=\"jian\">-</span>"
+										html += "<input type=\"number\" class=\"shu\" value=\"" + data.data.list[i].productCount + "\" />"
+										html += "<span   class=\"jia\">+</span>"
+										html += "</div</th>"
+										if(data.data.list[i].payMode==0)
+										{
+											html += "<th  class=\"Totals\"><span class=\"brown Total\">" + parseInt(data.data.list[i].price) * parseInt(data.data.list[i].productCount) + "</span><span class=\"brown\">积分</span></th>"
+										}
+										if(data.data.list[i].payMode==1)
+										{
+											html += "<th  class=\"Totals\"><span class=\"brown Total dhline\">" + parseInt(data.data.list[i].promotionPrice) * parseInt(data.data.list[i].productCount) + "</span><span class=\"brown\">积分</span></th>"
+										}
+										
+										
+										
+										html += "<th><img src=\"img/del.png\" class=\"delbtn\"  id=\"" + data.data.list[i].id + "\" /></th>"
+										html += "</tr>";
+									}
+									$(".loadingbox").hide();
+									$("#list").append(html)
+//									$("#all").trigger("click");
+                                     FormObj.TotalMoney()
+
+								}
+								if(data.code == 1) {
+									//									window.location.href = 'login.html'
+								} else {
+									$(".tpsbox .message").html(data.message);
+								}
+							},
+							error: function() {
+
+							}
+						});
+					},
+					getuserinfo: function() {
+						//用户信息					
+						if(localStorage.getItem("token")) {
+							$.ajax({
+								type: "post",
+								url: Work_Config.InterfaceDomain + "/user/getShopUserByToken",
+								async: true,
+								data: {
+									token: localStorage.getItem("token")
+								},
+								success: function(data) {
+									coupon = data.data.coupon;
+									bonus = data.data.bonus;
+									$("#coupon").html(data.data.coupon);
+									$("#bonus").html(data.data.bonus);
+									 
+
+								},
+								error: function() {
+
+								}
+							});
+
+						}
+
+					},
+					ADDEvent: function() {
+						var self = this;
+						$("body").on("click", ".jia", function() {
+							$(this).prev().val(parseInt($(this).prev().val()) + 1);
+						})
+						$("body").on("click", ".jian", function() {
+							$(this).next().val(parseInt($(this).next().val()) - 1);
+							if(parseInt($(this).next().val()) == 0) {
+								$(this).next().val(1)
+							}
+						})
+						//一键控制全选、反选、全不选
+						$("body #list").on("click", ".label", function() {
+							$(this).toggleClass("labelchecked")
+							$(this).parent().parent().toggleClass("checkenline")
+							
+							self.TotalMoney()
+						});
+						$('body').on("click", "#all", function() {
+							$(this).toggleClass("labelchecked")
+							if($(this).hasClass("labelchecked")) {
+								$(this).addClass("labelchecked")
+								$("#list .label").each(function() {
+									if(!$(this).hasClass("labelchecked")){
+										$(this).addClass("labelchecked")
+										$(this).parent().parent().addClass("checkenline")
+										let id=$(this).parent().parent().find(".delbtn").attr("id")
+										let Total=$(this).parent().parent().find(".shu").val()
+                                        let payMode=$(this).parent().parent().find(".paymodal").val()																
+										self.updateShopCarById(id,Total,payMode)										
+									}
+									
+//									
+//									
+//								 
+//									self.updateShopCarById(id,Total,payMode)
+								});
+								self.TotalMoney()
+							} else {
+								$(this).removeClass("labelchecked")
+								$(".label").each(function() {									
+									if($(this).hasClass("labelchecked")){
+										$(this).removeClass("labelchecked")
+								    	$(this).parent().parent().removeClass("checkenline")
+
+
+										let id=$(this).parent().parent().find(".delbtn").attr("id")
+										let isdel=0
+										self.delproduct(id,isdel)							
+									}
+									
+								
+								});
+								self.TotalMoney()
+							}
+
+						});
+						$("body").on("change", ".paymodal", function() {
+							var Total = $(this).parent().next().find(".shu").val()
+							var money
+							console.log(Total)
+							if($(this).val() == 0) {
+								money = $(this).next().text();
+								$(this).parent().parent().find(".money span").html(money);
+								$(this).parent().next().next().find(".Total").removeClass("dhline")
+							}
+							if($(this).val() == 1) {
+								money = $(this).next().next().text();
+								console.log(money);
+								$(this).parent().parent().find(".money span").html(money);
+								$(this).parent().next().next().find(".Total").addClass("dhline")
+							}
+							$(this).parent().next().next().find(".Total").html((money * Total));
+							self.TotalMoney()
+							let id=$(this).parent().next().next().next().find("img").attr("id");
+							let payMode=$(this).val()
+							
+							self.updateShopCarById(id,Total,payMode)
+							
+							
+						})
+						$("body").on("change", ".shu", function() {
+							var money = $(this).parent().parent().prev().prev().find("span").text();
+							var Total = $(this).val();
+							$(this).parent().parent().next().find(".Total").html((money * Total));
+							self.TotalMoney()
+							let id=$(this).parent().parent().next().next().find("img").attr("id");
+							let payMode=$(this).parent().parent().prev().find(".paymodal").val()
+							self.updateShopCarById(id,Total,payMode)
+						})
+						$("body").on("click", ".jia,.jian", function(event) {
+							var money = $(this).parent().parent().prev().prev().find("span").text();
+							var Total = $(this).parent().find(".shu").val();
+							$(this).parent().parent().next().find(".Total").html((money * Total));
+							self.TotalMoney()
+							let id=$(this).parent().parent().next().next().find("img").attr("id");
+							let payMode=$(this).parent().parent().prev().find(".paymodal").val()
+							console.log(payMode)
+							self.updateShopCarById(id,Total,payMode)
+							
+						})
+						$("body").on("click", ".delbtn", function(event) {						 
+							var id = event.currentTarget.id
+							let isdel=1
+							self.delproduct(id,isdel)
+							
+
+						})
+						$("body").on('click', '#paybtn', function() {
+							self.getuserinfo()
+							if(coupon < totaldh) {
+								var dialog = bootbox.dialog({
+									title: '温馨提示',
+									message: "<div><h2 class=\"text-center \">对不起，余额不足</h2><p class=\"text-center \">检测到你本次需要支付<span class='brown'>" + totaljf + "</span> 积分和 <span class='brown'>" + totaldh + " 兑货券分</span> </p><h2 class=\"text-center brown\">余额" + coupon + "兑货券积分不足</h2></div>",
+									size: 'middle'
+								});
+								return
+							}
+							if(bonus < totaljf) {
+
+								var dialog = bootbox.dialog({
+									title: '温馨提示',
+									message: "<div><h2 class=\"text-center \">对不起，余额不足</h2><p class=\"text-center \">检测到你本次需要支付<span class='brown'>" + totaljf + "</span> 积分和 <span class='brown'>" + totaldh + " 兑货券分</span> </p><h2 class=\"text-center brown\">余额" + bonus + "积分不足</h2></div>",
+									size: 'middle',
+									buttons: {
+										noclose: {
+											label: "充值",
+											className: 'btn-warning btn-block col-6 center-block ma',
+											callback: function() {
+												
+											}
+										}
+									}
+								});
+								return
+							}
+							localStorage.setItem("zhjf",0)
+							localStorage.setItem("zhdhq",0)
+							localStorage.setItem("zhjf",totaljf)
+							localStorage.setItem("zhdhq",totaldh)
+							if(JSON.parse(localStorage.getItem("usarData")).type==1)
+							{
+								window.location.href = "order.html"
+							}
+							if(JSON.parse(localStorage.getItem("usarData")).type==2)
+							{
+								window.location.href = "orderCK.html"
+							}
+							
+
+						})
+					}
+
+				};
+				//初始化
+				FormObj.Init();
+			}(jQuery));
+		</script>
+		<script type="text/javascript">
+			//													$(".label").each(function() {
+			//														$(this).addClass("labelchecked")
+			//					
+			//													});
+		</script>
+	</body>
+
+</html>
